@@ -4,9 +4,14 @@ export default class ShipController {
 
     if (cursors.left.isDown) {
       ship.setVelocityX(-speed);
+      ship.anims.play("left", true);
     } else if (cursors.right.isDown) {
       ship.setVelocityX(speed);
+      ship.anims.play("right", true);
+    } else {
+      ship.anims.play("straight", true);
     }
+
     if (cursors.up.isDown) {
       ship.setVelocityY(-speed);
     } else if (cursors.down.isDown) {
