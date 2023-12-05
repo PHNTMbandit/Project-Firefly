@@ -1,8 +1,7 @@
-import Phaser from "phaser";
-import Ship from "./ship.js";
+import spawnShip from "./ships";
+import shipController from "./ship-controller";
 
 let player;
-let keySpace;
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -15,25 +14,33 @@ export default class World1 extends Phaser.Scene {
       "public/sprites/ships.json",
       "public/sprites"
     );
+
+    this.load.multiatlas(
+      "projectiles",
+      "public/sprites/projectiles.json",
+      "public/sprites"
+    );
   }
 
   create() {
     this.addInput();
-
-    player = new Ship(
+    player = spawnShip(
+      "Proto",
       this,
       this.scale.width * 0.5,
-      this.scale.height - 32,
-      "8x8/SpaceShooterAssetPack_Ships-1.png"
+      this.scale.height - 32
     );
   }
 
-  update(time, delta) {
-    player.move(this.cursors, keySpace, time);
+  update(time) {
+    shipController.moveShip(player, player.speed, this.cursors);
+    shipController.shoot(player, this.keySpace, time);
   }
 
   addInput() {
     this.cursors = this.input.keyboard.createCursorKeys();
-    keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.keySpace = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.SPACE
+    );
   }
 }
