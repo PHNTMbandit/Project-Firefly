@@ -39,7 +39,7 @@ export default class World1 extends Phaser.Scene {
       this.scale.width * 0.5,
       this.scale.height - 150
     );
-    console.log(player.projectileGroup.damage);
+
     this.physics.add.overlap(
       enemy,
       player.projectileGroup,

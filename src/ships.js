@@ -10,6 +10,15 @@ var getShip = function (shipName) {
       health: 100,
       speed: 65,
     },
+
+    Dom: {
+      sprite: "8x8/SpaceShooterAssetPack_Ships-4.png",
+      leftTurnSprite: "8x8/SpaceShooterAssetPack_Ships-5.png",
+      rightTurnSprite: "8x8/SpaceShooterAssetPack_Ships-3.png",
+      projectileType: "laser",
+      health: 100,
+      speed: 100,
+    },
   };
 
   return ships[shipName];
@@ -55,6 +64,13 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.setCollideWorldBounds(true);
 
     this.scene.anims.create({
+      key: "straight",
+      frames: [{ key: "ships", frame: sprite }],
+      frameRate: 1,
+      repeat: -1,
+    });
+
+    this.scene.anims.create({
       key: "left",
       frames: [{ key: "ships", frame: leftTurnSprite }],
       frameRate: 1,
@@ -64,15 +80,6 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.scene.anims.create({
       key: "right",
       frames: [{ key: "ships", frame: rightTurnSprite }],
-      frameRate: 1,
-      repeat: -1,
-    });
-
-    this.scene.anims.create({
-      key: "straight",
-      frames: [
-        { key: "ships", frame: "8x8/SpaceShooterAssetPack_Ships-1.png" },
-      ],
       frameRate: 1,
       repeat: -1,
     });
