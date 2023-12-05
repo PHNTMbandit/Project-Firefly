@@ -1,5 +1,4 @@
-import Phaser from "phaser";
-import { spawnShip } from "./ships";
+import spawnShip from "./ships";
 import shipController from "./ship-controller";
 
 let player;
@@ -25,17 +24,17 @@ export default class World1 extends Phaser.Scene {
 
   create() {
     this.addInput();
-    / player = spawnShip(0, this, this.scale.width * 0.5, this.scale.height - 32);
+    player = spawnShip(
+      "Proto",
+      this,
+      this.scale.width * 0.5,
+      this.scale.height - 32
+    );
   }
 
   update(time) {
-    shipController.moveShip(player.sprite, player.ship.speed, this.cursors);
-    shipController.shoot(
-      player.sprite,
-      player.ship.projectiles,
-      this.keySpace,
-      time
-    );
+    shipController.moveShip(player, player.speed, this.cursors);
+    shipController.shoot(player, this.keySpace, time);
   }
 
   addInput() {

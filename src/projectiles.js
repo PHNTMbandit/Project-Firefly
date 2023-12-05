@@ -1,5 +1,5 @@
-export var getProjectileGroup = function (projectileTypeName, scene) {
-  const projectileGroup = {
+var getProjectileType = function (projectileTypeName) {
+  const types = {
     laser: {
       sprite: "SpaceShooterAssetPack_Projectiles-0.png",
       fireRate: 100,
@@ -8,17 +8,19 @@ export var getProjectileGroup = function (projectileTypeName, scene) {
     },
   };
 
-  return {
-    projectile: projectileGroup[projectileTypeName],
-    group: new ProjectileGroup(
-      scene,
-      projectileGroup[projectileTypeName].sprite,
-      projectileGroup[projectileTypeName].fireRate,
-      projectileGroup[projectileTypeName].amount,
-      projectileGroup[projectileTypeName].scale
-    ),
-  };
+  return types[projectileTypeName];
 };
+
+export default function spawnProjectileGroup(projectileTypeName, scene) {
+  const projectileType = getProjectileType(projectileTypeName);
+  return new ProjectileGroup(
+    scene,
+    projectileType.sprite,
+    projectileType.fireRate,
+    projectileType.amount,
+    projectileType.scale
+  );
+}
 
 class ProjectileGroup extends Phaser.Physics.Arcade.Group {
   constructor(scene, sprite, fireRate, amount, scale) {

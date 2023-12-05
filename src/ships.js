@@ -1,35 +1,31 @@
-import { getProjectileGroup } from "./projectiles";
+import spawnProjectileGroup from "./projectiles";
 
-class Ship {
-  constructor(name, spriteName, speed, projectiles) {
-    this.name = name;
-    this.spriteName = spriteName;
-    this.speed = speed;
-    this.projectiles = projectiles;
-  }
-}
-
-var getShip = function (shipID, scene) {
+var getShip = function (shipName) {
   const ships = {
-    0: new Ship(
-      "Proto",
-      "8x8/SpaceShooterAssetPack_Ships-1.png",
-      65,
-      getProjectileGroup("laser", scene)
-    ),
+    Proto: {
+      sprite: "8x8/SpaceShooterAssetPack_Ships-1.png",
+      speed: 65,
+      projectileType: "laser",
+    },
   };
 
-  return ships[shipID];
+  return ships[shipName];
 };
 
-export function spawnShip(shipID, scene, x, y) {
-  const ship = getShip(shipID, scene);
-  const sprite = scene.physics.add.sprite(x, y, "ships", ship.spriteName);
+export default function spawnShip(shipName, scene, x, y) {
+  const ship = getShip(shipName);
+  return new Ship(scene, x, y, ship.sprite, ship.speed, ship.projectileType);
+}
 
-  sprite.setCollideWorldBounds(true);
+class Ship extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, sprite, speed, projectileType) {
+    super(scene, x, y, "ships", sprite);
 
-  return {
-    ship: ship,
-    sprite: sprite,
-  };
+    scene.add.existing(this);
+    scene.physics.add.existing(this);
+
+    this.speed = speed;
+    this.projectileGroup = spawnProjectileGroup(projectileType, scene);
+    this.setCollideWorldBounds(true);
+  }
 }
