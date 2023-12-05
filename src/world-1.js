@@ -25,7 +25,7 @@ export default class World1 extends Phaser.Scene {
 
   create() {
     this.addInput();
-    player = spawnShip(0, this, this.scale.width * 0.5, this.scale.height - 32);
+    / player = spawnShip(0, this, this.scale.width * 0.5, this.scale.height - 32);
   }
 
   update(time) {
