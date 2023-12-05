@@ -2,6 +2,8 @@ var getProjectileType = function (projectileTypeName) {
   const types = {
     laser: {
       sprite: "SpaceShooterAssetPack_Projectiles-0.png",
+      damage: 10,
+      speed: 200,
       fireRate: 100,
       amount: 100,
       scale: 1,
@@ -16,17 +18,22 @@ export default function spawnProjectileGroup(projectileTypeName, scene) {
   return new ProjectileGroup(
     scene,
     projectileType.sprite,
+    projectileType.damage,
+    projectileType.speed,
     projectileType.fireRate,
     projectileType.amount,
     projectileType.scale
   );
 }
 
+let projectileDamage;
 class ProjectileGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene, sprite, fireRate, amount, scale) {
+  constructor(scene, sprite, damage, speed, fireRate, amount, scale) {
     super(scene.physics.world, scene);
 
     this.sprite = sprite;
+    projectileDamage = damage;
+    this.speed = speed;
     this.fireRate = fireRate;
     this.fireElapsedTime = 0;
 
@@ -49,8 +56,13 @@ class ProjectileGroup extends Phaser.Physics.Arcade.Group {
 
     if (projectile && time > this.fireElapsedTime) {
       this.fireElapsedTime = time + this.fireRate;
-      projectile.shoot(x, y);
+      projectile.shoot(x, y, this.speed);
     }
+  }
+
+  damageTarget(target, projectile) {
+    target.takeDamage(projectileDamage);
+    projectile.disableBody(true, true);
   }
 }
 
@@ -59,9 +71,9 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, "projectiles");
   }
 
-  shoot(x, y) {
+  shoot(x, y, speed) {
     this.enableBody(true, x, y, true, true);
-    this.setVelocityY(-100);
+    this.setVelocityY(-speed);
   }
 
   preUpdate(time, delta) {
