@@ -47,6 +47,15 @@ export default class World1 extends Phaser.Scene {
       "SpaceShooterAssetPack_BackGrounds-5.png"
     );
 
+    this.background2 = this.add.tileSprite(
+      50,
+      50,
+      1920,
+      1080,
+      "backgrounds",
+      "SpaceShooterAssetPack_BackGrounds-5.png"
+    );
+
     this.player = spawnShip(
       "Proto",
       this,
@@ -75,7 +84,8 @@ export default class World1 extends Phaser.Scene {
     shipController.shoot(this.player, this.keySpace, time);
 
     this.background.tilePositionY -= 0.1;
-    this.background1.tilePositionY -= 0.4;
+    this.background1.tilePositionY -= 0.3;
+    this.background2.tilePositionY -= 0.7;
   }
 
   addInput() {

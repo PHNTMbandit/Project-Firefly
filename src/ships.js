@@ -8,7 +8,7 @@ var getShip = function (shipName) {
       rightTurnSprite: "8x8/SpaceShooterAssetPack_Ships-0.png",
       projectileType: "laser",
       health: 100,
-      speed: 65,
+      speed: 100,
     },
 
     Dom: {
