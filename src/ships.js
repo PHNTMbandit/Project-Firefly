@@ -1,6 +1,6 @@
-import spawnProjectileGroup from "./projectiles";
+import ProjectileGroup from "./projectiles";
 
-var getShip = function (shipName) {
+var getShipType = function (shipName) {
   const ships = {
     Proto: {
       sprite: "8x8/SpaceShooterAssetPack_Ships-1.png",
@@ -24,72 +24,68 @@ var getShip = function (shipName) {
   return ships[shipName];
 };
 
-export default function spawnShip(shipName, scene, x, y) {
-  const ship = getShip(shipName);
-  return new Ship(
-    scene,
-    x,
-    y,
-    ship.sprite,
-    ship.leftTurnSprite,
-    ship.rightTurnSprite,
-    ship.projectileType,
-    ship.health,
-    ship.speed
-  );
-}
+export default class ShipGroup extends Phaser.Physics.Arcade.Group {
+  constructor(scene, shipName) {
+    super(scene.physics.world, scene);
 
-class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(
-    scene,
-    x,
-    y,
-    sprite,
-    leftTurnSprite,
-    rightTurnSprite,
-    projectileType,
-    health,
-    speed
-  ) {
-    super(scene, x, y, "ships", sprite);
+    this.shipType = getShipType(shipName);
 
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
+    this.group = this.createMultiple({
+      key: "ships",
+      frame: this.shipType.sprite,
+      frameQuantity: 20,
+      active: false,
+      visible: false,
+    });
 
-    this.leftTurnSprite = leftTurnSprite;
-    this.rightTurnSprite = rightTurnSprite;
-    this.projectileGroup = spawnProjectileGroup(projectileType, scene);
-    this.health = health;
-    this.speed = speed;
-    this.setCollideWorldBounds(true);
+    this.group.forEach((ships) => (ships.data = this.shipType));
+
+    this.projectileGroup = new ProjectileGroup(
+      scene,
+      this.shipType.projectileType
+    );
 
     this.scene.anims.create({
       key: "straight",
-      frames: [{ key: "ships", frame: sprite }],
+      frames: [{ key: "ships", frame: this.shipType.sprite }],
       frameRate: 1,
       repeat: -1,
     });
 
     this.scene.anims.create({
       key: "left",
-      frames: [{ key: "ships", frame: leftTurnSprite }],
+      frames: [{ key: "ships", frame: this.shipType.leftTurnSprite }],
       frameRate: 1,
       repeat: -1,
     });
 
     this.scene.anims.create({
       key: "right",
-      frames: [{ key: "ships", frame: rightTurnSprite }],
+      frames: [{ key: "ships", frame: this.shipType.rightTurnSprite }],
       frameRate: 1,
       repeat: -1,
     });
   }
 
-  takeDamage(amount) {
-    this.health -= amount;
+  spawnShip(x, y) {
+    const ship = this.getFirstDead(false);
 
-    if (this.health <= 0) {
-      this.disableBody(true, true);
+    ship.enableBody(true, x, y, true, true);
+    ship.setCollideWorldBounds(true);
+
+    return ship;
+  }
+
+  shoot(x, y, time) {
+    this.projectileGroup.shootProjectile(x, y, time);
+  }
+
+  damage(ship, projectile) {
+    ship.data.health -= projectile.data.damage;
+    projectile.disableBody(true, true);
+
+    if (ship.data.health <= 0) {
+      ship.disableBody(true, true);
     }
   }
 }

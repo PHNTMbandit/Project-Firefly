@@ -19,9 +19,9 @@ export default class ShipController {
     }
   }
 
-  static shoot(ship, keySpace, time) {
+  static shoot(ship, x, y, keySpace, time) {
     if (keySpace.isDown) {
-      ship.projectileGroup.shootProjectile(ship.x, ship.y - 8, time);
+      ship.shoot(x, y - 8, time);
     }
   }
 }
