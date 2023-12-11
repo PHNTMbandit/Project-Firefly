@@ -11,7 +11,7 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
   ) {
     super(scene, 0, 0, spriteSheet, name);
 
-    this.weapon = new AutoCannon(scene, 0, 0, this);
+    this.weapon = new AutoCannon(scene, 0, 0);
     this.speed = speed;
     this.health = health;
 
@@ -28,10 +28,14 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
   moveY(y) {
     this.physics.body.velocity.y = y;
   }
+
+  shoot(x, y, time) {
+    this.weapon.use();
+  }
 }
 
 class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, ship) {
+  constructor(scene, x, y) {
     super(
       scene,
       x,
@@ -39,5 +43,9 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       "weapons",
       "auto-cannons/Main Ship - Weapons - Auto Cannon-0"
     );
+  }
+
+  use() {
+    console.log("shooting");
   }
 }

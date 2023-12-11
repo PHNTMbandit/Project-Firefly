@@ -28,8 +28,9 @@ export default class World1 extends Phaser.Scene {
     );
   }
 
-  update() {
+  update(time) {
     this.playerController.moveShip(this.cursors);
+    this.playerController.shoot(this.keySpace, time);
   }
 
   addInput() {
