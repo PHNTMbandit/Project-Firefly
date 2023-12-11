@@ -1,5 +1,4 @@
 import PlayerController from "./player-controller";
-import playerController from "./player-controller";
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -9,7 +8,13 @@ export default class World1 extends Phaser.Scene {
   preload() {
     this.load.multiatlas(
       "player-ship",
-      "public/sprites/main-ship.json",
+      "public/sprites/player-ship.json",
+      "public/sprites"
+    );
+
+    this.load.multiatlas(
+      "weapons",
+      "public/sprites/weapons.json",
       "public/sprites"
     );
   }

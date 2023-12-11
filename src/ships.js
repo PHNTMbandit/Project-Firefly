@@ -1,13 +1,43 @@
 export default class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, name, collidesWithWorld) {
-    super(scene, x, y, "player-ship", name);
+  constructor(
+    scene,
+    x,
+    y,
+    spriteSheet,
+    name,
+    collidesWithWorld,
+    health,
+    speed
+  ) {
+    super(scene, 0, 0, spriteSheet, name);
 
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
+    this.weapon = new AutoCannon(scene, 0, 0, this);
+    this.speed = speed;
+    this.health = health;
 
-    this.setDamping(true);
-    this.setDrag(0.99);
-    this.setMaxVelocity(200);
-    this.setCollideWorldBounds(collidesWithWorld);
+    const container = scene.add.container(x, y, [this.weapon, this]);
+    container.setSize(48, 48);
+    this.physics = scene.physics.add.existing(container);
+    this.physics.body.setCollideWorldBounds(collidesWithWorld);
+  }
+
+  moveX(x) {
+    this.physics.body.velocity.x = x;
+  }
+
+  moveY(y) {
+    this.physics.body.velocity.y = y;
+  }
+}
+
+class AutoCannon extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, ship) {
+    super(
+      scene,
+      x,
+      y,
+      "weapons",
+      "auto-cannons/Main Ship - Weapons - Auto Cannon-0"
+    );
   }
 }

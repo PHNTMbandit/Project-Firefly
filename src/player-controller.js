@@ -2,22 +2,30 @@ import Ship from "./ships";
 
 export default class PlayerController {
   constructor(scene, x, y) {
-    this.player = new Ship(scene, x, y, "Main Ship - Base - Full health.png");
-    this.speed = 100;
+    this.player = new Ship(
+      scene,
+      x,
+      y,
+      "player-ship",
+      "Main Ship - Base - Full health.png",
+      true,
+      100,
+      100
+    );
   }
   moveShip(cursors) {
-    this.player.body.velocity.scale(0.75);
+    this.player.physics.body.velocity.scale(0.75);
 
     if (cursors.left.isDown) {
-      this.player.setVelocityX(-this.speed);
+      this.player.moveX(-this.player.speed);
     } else if (cursors.right.isDown) {
-      this.player.setVelocityX(this.speed);
+      this.player.moveX(this.player.speed);
     }
 
     if (cursors.up.isDown) {
-      this.player.setVelocityY(-this.speed);
+      this.player.moveY(-this.player.speed);
     } else if (cursors.down.isDown) {
-      this.player.setVelocityY(this.speed);
+      this.player.moveY(this.player.speed);
     }
   }
 
