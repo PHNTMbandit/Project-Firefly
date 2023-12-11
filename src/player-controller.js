@@ -15,7 +15,7 @@ export default class PlayerController {
   }
 
   moveShip(cursors) {
-    this.player.physics.body.velocity.scale(0.75);
+    this.player.physics.body.velocity.scale(0.95);
 
     if (cursors.left.isDown) {
       this.player.moveX(-this.player.speed);
@@ -32,7 +32,11 @@ export default class PlayerController {
 
   shoot(keySpace, time) {
     if (keySpace.isDown) {
-      this.player.shoot(this.player.x, this.player.y - 8, time);
+      this.player.shoot(
+        this.player.physics.body.x,
+        this.player.physics.body.y - 8,
+        time
+      );
     }
   }
 }

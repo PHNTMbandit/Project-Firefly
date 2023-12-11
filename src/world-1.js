@@ -13,6 +13,12 @@ export default class World1 extends Phaser.Scene {
     );
 
     this.load.multiatlas(
+      "projectiles",
+      "public/sprites/projectiles.json",
+      "public/sprites"
+    );
+
+    this.load.multiatlas(
       "weapons",
       "public/sprites/weapons.json",
       "public/sprites"
