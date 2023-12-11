@@ -31,8 +31,8 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
     this.physics.body.velocity.y = y;
   }
 
-  shoot(x, y, time) {
-    this.weapon.use(x, y, time);
+  shoot(ship, time) {
+    this.weapon.use(ship, time);
   }
 }
 
@@ -57,18 +57,38 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
         end: 6,
         zeroPad: 1,
       }),
-      frameRate: 50,
+      frameRate: this.fireRate / 3,
     });
+
+    this.anims.create({
+      key: "idle",
+      frames: [
+        {
+          key: "weapons",
+          frame: "auto-cannons/Main Ship - Weapons - Auto Cannon-0",
+        },
+      ],
+      frameRate: 1,
+    });
+
+    this.on(
+      Phaser.Animations.Events.ANIMATION_COMPLETE,
+      function () {
+        this.anims.play("idle");
+      },
+      this
+    );
 
     this.scene.add.existing(this);
   }
 
-  use(x, y, time) {
+  use(ship, time) {
     if (time > this.fireElapsedTime) {
       this.fireElapsedTime = time + this.fireRate;
 
       this.anims.play("use");
-      this.projectileGroup.shoot(x, y, time);
+      this.projectileGroup.shoot(ship.x + 6, ship.y, time);
+      this.projectileGroup.shoot(ship.x + 26, ship.y, time);
     }
   }
 }

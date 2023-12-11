@@ -32,11 +32,7 @@ export default class PlayerController {
 
   shoot(keySpace, time) {
     if (keySpace.isDown) {
-      this.player.shoot(
-        this.player.physics.body.x,
-        this.player.physics.body.y - 8,
-        time
-      );
+      this.player.shoot(this.player.physics.body, time);
     }
   }
 }
