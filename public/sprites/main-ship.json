@@ -1,0 +1,104 @@
+{
+	"textures": [
+		{
+			"image": "main-ship.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 136,
+				"h": 30
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Main Ship - Base - Damaged.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 10,
+						"w": 32,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Main Ship - Base - Full health.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 10,
+						"w": 32,
+						"h": 28
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 32,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Main Ship - Base - Slight damage.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 10,
+						"w": 32,
+						"h": 28
+					},
+					"frame": {
+						"x": 69,
+						"y": 1,
+						"w": 32,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Main Ship - Base - Very damaged.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 10,
+						"w": 32,
+						"h": 28
+					},
+					"frame": {
+						"x": 103,
+						"y": 1,
+						"w": 32,
+						"h": 28
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:150d585f037a3e117f869f3bd7ffdc82:a0ba41fc74c1654a2c42d65f2b039cf0:97fdaf7a4abb3e287f3237b9ae49cc86$"
+	}
+}
