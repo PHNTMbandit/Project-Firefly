@@ -1,4 +1,4 @@
-import getProjectile from "./projectiles";
+import getWeapon from "./weapons";
 
 export default class Ship extends Phaser.Physics.Arcade.Sprite {
   constructor(
@@ -13,7 +13,7 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
   ) {
     super(scene, 0, 0, spriteSheet, name);
 
-    this.weapon = new AutoCannon(scene, 0, 0);
+    this.weapon = getWeapon(scene, "Auto Cannon", this);
     this.speed = speed;
     this.health = health;
 
@@ -33,62 +33,5 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
 
   shoot(ship, time) {
     this.weapon.use(ship, time);
-  }
-}
-
-class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
-    super(
-      scene,
-      x,
-      y,
-      "weapons",
-      "auto-cannons/Main Ship - Weapons - Auto Cannon-0"
-    );
-
-    this.fireRate = 150;
-    this.fireElapsedTime = 0;
-    this.projectileGroup = getProjectile(scene, "Bullet");
-
-    this.anims.create({
-      key: "use",
-      frames: this.anims.generateFrameNames("weapons", {
-        prefix: "auto-cannons/Main Ship - Weapons - Auto Cannon-",
-        end: 6,
-        zeroPad: 1,
-      }),
-      frameRate: this.fireRate / 3,
-    });
-
-    this.anims.create({
-      key: "idle",
-      frames: [
-        {
-          key: "weapons",
-          frame: "auto-cannons/Main Ship - Weapons - Auto Cannon-0",
-        },
-      ],
-      frameRate: 1,
-    });
-
-    this.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      function () {
-        this.anims.play("idle");
-      },
-      this
-    );
-
-    this.scene.add.existing(this);
-  }
-
-  use(ship, time) {
-    if (time > this.fireElapsedTime) {
-      this.fireElapsedTime = time + this.fireRate;
-
-      this.anims.play("use");
-      this.projectileGroup.shoot(ship.x + 6, ship.y, time);
-      this.projectileGroup.shoot(ship.x + 26, ship.y, time);
-    }
   }
 }

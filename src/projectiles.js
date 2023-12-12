@@ -59,7 +59,7 @@ class BulletGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  shoot(x, y, time) {
+  shoot(x, y) {
     const projectile = this.getFirstDead(false);
 
     if (projectile) {
