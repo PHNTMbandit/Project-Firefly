@@ -1,17 +1,8 @@
-import Ship from "./ships";
+import getShip from "./ships";
 
 export default class PlayerController {
   constructor(scene, x, y) {
-    this.player = new Ship(
-      scene,
-      x,
-      y,
-      "player-ship",
-      "Main Ship - Base - Full health.png",
-      true,
-      100,
-      100
-    );
+    this.player = getShip(scene, x, y, "player");
   }
 
   moveShip(cursors) {
@@ -32,7 +23,7 @@ export default class PlayerController {
 
   shoot(keySpace, time) {
     if (keySpace.isDown) {
-      this.player.shoot(this.player.physics.body, time);
+      this.player.shoot(time);
     }
   }
 }

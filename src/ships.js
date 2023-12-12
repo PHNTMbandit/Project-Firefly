@@ -1,26 +1,77 @@
 import getWeapon from "./weapons";
 
-export default class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(
-    scene,
-    x,
-    y,
-    spriteSheet,
-    name,
-    collidesWithWorld,
-    health,
-    speed
-  ) {
-    super(scene, 0, 0, spriteSheet, name);
+export default function getShip(scene, x, y, shipName) {
+  switch (shipName) {
+    case "player":
+      return new ShipBuilder(
+        scene,
+        x,
+        y,
+        "player-ship",
+        "Main Ship - Base - Full health.png",
+        true
+      )
+        .addHealth(100)
+        .addSpeed(100)
+        .addWeapon(scene, "Auto Cannon")
+        .build();
+  }
+}
 
-    this.weapon = getWeapon(scene, "Auto Cannon", this);
-    this.speed = speed;
-    this.health = health;
+class ShipBuilder {
+  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+    this.ship = new Ship(
+      scene,
+      x,
+      y,
+      spriteSheet,
+      spriteName,
+      collidesWithWorld
+    );
+  }
 
-    const container = scene.add.container(x, y, [this.weapon, this]);
-    container.setSize(32, 32);
-    this.physics = scene.physics.add.existing(container);
+  addHealth(health) {
+    this.ship.addHealth(health);
+    return this;
+  }
+
+  addSpeed(speed) {
+    this.ship.addSpeed(speed);
+    return this;
+  }
+
+  addWeapon(scene, weaponName) {
+    this.ship.addWeapon(scene, weaponName);
+    return this;
+  }
+
+  build() {
+    return this.ship;
+  }
+}
+
+class Ship extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+    super(scene, 0, 0, spriteSheet, spriteName);
+
+    this.container = scene.add.container(x, y, this);
+    this.container.setSize(32, 32);
+    this.physics = scene.physics.add.existing(this.container);
     this.physics.body.setCollideWorldBounds(collidesWithWorld);
+  }
+
+  addHealth(health) {
+    this.health = health;
+  }
+
+  addSpeed(speed) {
+    this.speed = speed;
+  }
+
+  addWeapon(scene, weaponName) {
+    this.weapon = getWeapon(scene, weaponName, this);
+    this.physics.add(this.weapon);
+    this.container.sendToBack(this.weapon);
   }
 
   moveX(x) {
@@ -31,7 +82,9 @@ export default class Ship extends Phaser.Physics.Arcade.Sprite {
     this.physics.body.velocity.y = y;
   }
 
-  shoot(ship, time) {
-    this.weapon.use(ship, time);
+  shoot(time) {
+    if (this.weapon != null) {
+      this.weapon.use(this.physics.body, time);
+    }
   }
 }
