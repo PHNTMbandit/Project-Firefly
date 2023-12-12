@@ -13,7 +13,7 @@ export default function getShip(scene, x, y, shipName) {
       )
         .addHealth(100)
         .addSpeed(100)
-        .addWeapon(scene, "Auto Cannon")
+        .addWeapon(scene, "auto cannon")
         .build();
   }
 }

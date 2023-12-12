@@ -2,8 +2,11 @@ import getProjectile from "./projectiles";
 
 export default function getWeapon(scene, name, ship) {
   switch (name) {
-    case "Auto Cannon":
+    case "auto cannon":
       return new AutoCannon(scene, ship.x, ship.y);
+
+    case "zapper":
+      return new Zapper(scene, ship.x, ship.y);
   }
 }
 
@@ -17,10 +20,10 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       "auto-cannons/Main Ship - Weapons - Auto Cannon-0"
     );
 
-    this.fireRate = 150;
+    this.fireRate = 200;
     this.frameRate = 6000;
     this.fireElapsedTime = 0;
-    this.projectileGroup = getProjectile(scene, "Bullet");
+    this.projectileGroup = getProjectile(scene, "bullet");
 
     this.anims.create({
       key: "use",
@@ -31,25 +34,6 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: this.frameRate / this.fireRate,
     });
-
-    this.anims.create({
-      key: "idle",
-      frames: [
-        {
-          key: "weapons",
-          frame: "auto-cannons/Main Ship - Weapons - Auto Cannon-0",
-        },
-      ],
-      frameRate: 1,
-    });
-
-    this.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      function () {
-        this.anims.play("idle");
-      },
-      this
-    );
 
     this.scene.add.existing(this);
   }
@@ -62,5 +46,30 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       this.projectileGroup.shoot(ship.x + 6, ship.y);
       this.projectileGroup.shoot(ship.x + 26, ship.y);
     }
+  }
+}
+
+class Zapper extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y) {
+    super(scene, x, y, "weapons", "zapper/Main Ship - Weapons - Zapper-0");
+
+    this.projectileGroup = getProjectile(scene, "laser beam");
+
+    this.anims.create({
+      key: "use",
+      frames: this.anims.generateFrameNames("weapons", {
+        prefix: "zapper/Main Ship - Weapons - Zapper-",
+        end: 8,
+        zeroPad: 1,
+      }),
+      frameRate: 30,
+    });
+
+    this.scene.add.existing(this);
+  }
+
+  use(ship) {
+    this.anims.play("use", true);
+    this.projectileGroup.shoot(ship.x + 16, ship.y);
   }
 }
