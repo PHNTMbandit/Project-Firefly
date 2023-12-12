@@ -86,6 +86,15 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 10,
     });
+
+    scene.add.tileSprite(
+      x,
+      y,
+      500,
+      0,
+      "projectiles",
+      "Laser Beam/Main ship weapon - Projectile - Zapper-0"
+    );
   }
 
   shoot(x, y) {
