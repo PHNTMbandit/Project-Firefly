@@ -13,7 +13,7 @@ export default function getShip(scene, x, y, shipName) {
       )
         .addHealth(100)
         .addSpeed(100)
-        .addWeapon(scene, "auto cannon")
+        .addWeapon(scene, "zapper")
         .build();
   }
 }
@@ -84,7 +84,13 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   shoot(time) {
     if (this.weapon != null) {
-      this.weapon.use(this.physics.body, time);
+      this.weapon.use(this.physics, time);
+    }
+  }
+
+  stopShooting() {
+    if (this.weapon != null) {
+      this.weapon.disuse();
     }
   }
 }

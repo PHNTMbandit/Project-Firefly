@@ -35,41 +35,95 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       frameRate: this.frameRate / this.fireRate,
     });
 
+    this.anims.create({
+      key: "idle",
+      frames: [
+        {
+          key: "weapons",
+          frame: "auto-cannons/Main Ship - Weapons - Auto Cannon-0",
+        },
+      ],
+      frameRate: 1,
+    });
+
+    this.on(
+      Phaser.Animations.Events.ANIMATION_COMPLETE,
+      function () {
+        this.anims.play("idle");
+      },
+      this
+    );
+
     this.scene.add.existing(this);
   }
 
-  use(ship, time) {
+  use(shipBody, time) {
     if (time > this.fireElapsedTime) {
       this.fireElapsedTime = time + this.fireRate;
 
       this.anims.play("use");
-      this.projectileGroup.shoot(ship.x + 6, ship.y);
-      this.projectileGroup.shoot(ship.x + 26, ship.y);
+      this.projectileGroup
+        .getProjectile()
+        .shoot(shipBody.x - 8, shipBody.y - 20);
+      this.projectileGroup
+        .getProjectile()
+        .shoot(shipBody.x + 8, shipBody.y - 20);
     }
   }
+
+  disuse() {}
 }
 
 class Zapper extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "weapons", "zapper/Main Ship - Weapons - Zapper-0");
+    super(scene, x, y, "weapons", "zapper/Main Ship - Weapons - Zapper-10");
 
     this.projectileGroup = getProjectile(scene, "laser beam");
+    this.laserBeam1 = this.projectileGroup.getProjectile(1);
+    this.laserBeam2 = this.projectileGroup.getProjectile(2);
 
     this.anims.create({
       key: "use",
       frames: this.anims.generateFrameNames("weapons", {
         prefix: "zapper/Main Ship - Weapons - Zapper-",
-        end: 8,
+        end: 10,
         zeroPad: 1,
       }),
-      frameRate: 30,
+      frameRate: 24,
     });
+
+    this.anims.create({
+      key: "idle",
+      frames: [
+        {
+          key: "weapons",
+          frame: "zapper/Main Ship - Weapons - Zapper-10",
+        },
+      ],
+      frameRate: 1,
+    });
+
+    this.on(
+      Phaser.Animations.Events.ANIMATION_COMPLETE,
+      function () {
+        this.anims.play("idle");
+      },
+      this
+    );
 
     this.scene.add.existing(this);
   }
 
-  use(ship) {
-    this.anims.play("use", true);
-    this.projectileGroup.shoot(ship.x + 16, ship.y);
+  use(shipBody) {
+    this.anims.play("use");
+    this.laserBeam1.shoot(shipBody.x - 8, shipBody.y - 33);
+    this.laserBeam2.shoot(shipBody.x + 8, shipBody.y - 33);
+  }
+
+  disuse() {
+    if (this.laserBeam1 != null && this.laserBeam2 != null) {
+      this.laserBeam1.disableBody(true, true);
+      this.laserBeam2.disableBody(true, true);
+    }
   }
 }

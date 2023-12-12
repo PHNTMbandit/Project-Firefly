@@ -29,6 +29,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       repeat: -1,
       showOnStart: true,
     });
+
+    this.speed = 350;
   }
 
   preUpdate(time, delta) {
@@ -39,18 +41,16 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  shoot(x, y, speed) {
+  shoot(x, y) {
     this.anims.play("shoot");
     this.enableBody(true, x, y, true, true);
-    this.setVelocityY(-speed);
+    this.setVelocityY(-this.speed);
   }
 }
 
 class BulletGroup extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super(scene.physics.world, scene);
-
-    this.speed = 300;
 
     this.createMultiple({
       classType: Bullet,
@@ -62,12 +62,8 @@ class BulletGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  shoot(x, y) {
-    const projectile = this.getFirstDead(false);
-
-    if (projectile) {
-      projectile.shoot(x, y, this.speed);
-    }
+  getProjectile() {
+    return this.getFirstDead(false);
   }
 }
 
@@ -85,17 +81,15 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
       key: "shoot",
       frames: this.anims.generateFrameNames("projectiles", {
         prefix: "Laser Beam/Main ship weapon - Projectile - Zapper-",
-        end: 2,
+        end: 7,
         zeroPad: 1,
       }),
       frameRate: 10,
-      repeat: -1,
-      showOnStart: true,
     });
   }
 
   shoot(x, y) {
-    this.anims.play("shoot");
+    this.anims.play("shoot", true);
     this.enableBody(true, x, y, true, true);
   }
 }
@@ -108,17 +102,13 @@ class LaserBeamGroup extends Phaser.Physics.Arcade.Group {
       classType: LaserBeam,
       key: "projectiles",
       frame: "Laser Beam/Main ship weapon - Projectile - Zapper-0",
-      frameQuantity: 10,
+      frameQuantity: 6,
       active: false,
       visible: false,
     });
   }
 
-  shoot(x, y) {
-    const projectile = this.getFirstDead(false);
-
-    if (projectile) {
-      projectile.shoot(x, y);
-    }
+  getProjectile(index) {
+    return this.children.getArray().at(index);
   }
 }
