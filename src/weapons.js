@@ -133,7 +133,6 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 
   use(keySpace) {
     if (keySpace.isDown) {
-      console.log(this.projectileScaleFactor);
       if (this.projectileScaleFactor < this.maxProjectileScaleFactor) {
         this.projectileScaleFactor += this.projectileScaleRate;
       }

@@ -58,6 +58,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.container.setSize(32, 32);
     this.physics = scene.physics.add.existing(this.container);
     this.physics.body.setCollideWorldBounds(collidesWithWorld);
+    this.physics.ship = this;
   }
 
   addHealth(health) {
@@ -70,6 +71,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   addWeapon(scene, weaponName) {
     this.weapon = getWeapon(scene, weaponName, this);
+    this.container.add(this.weapon);
     this.physics.add(this.weapon);
     this.container.sendToBack(this.weapon);
   }
@@ -85,6 +87,13 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
   shoot(keySpace, time) {
     if (this.weapon != null) {
       this.weapon.use(keySpace, time);
+    }
+  }
+
+  takeDamage(amount) {
+    this.health -= amount;
+    if (this.health <= 0) {
+      this.container.destroy();
     }
   }
 }
