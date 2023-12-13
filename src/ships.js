@@ -1,95 +1,90 @@
-import spawnProjectileGroup from "./projectiles";
+import getWeapon from "./weapons";
 
-var getShip = function (shipName) {
-  const ships = {
-    Proto: {
-      sprite: "8x8/SpaceShooterAssetPack_Ships-1.png",
-      leftTurnSprite: "8x8/SpaceShooterAssetPack_Ships-2.png",
-      rightTurnSprite: "8x8/SpaceShooterAssetPack_Ships-0.png",
-      projectileType: "laser",
-      health: 100,
-      speed: 65,
-    },
+export default function getShip(scene, x, y, shipName) {
+  switch (shipName) {
+    case "player":
+      return new ShipBuilder(
+        scene,
+        x,
+        y,
+        "player-ship",
+        "Main Ship - Base - Full health.png",
+        true
+      )
+        .addHealth(100)
+        .addSpeed(100)
+        .addWeapon(scene, "big space gun")
+        .build();
+  }
+}
 
-    Dom: {
-      sprite: "8x8/SpaceShooterAssetPack_Ships-4.png",
-      leftTurnSprite: "8x8/SpaceShooterAssetPack_Ships-5.png",
-      rightTurnSprite: "8x8/SpaceShooterAssetPack_Ships-3.png",
-      projectileType: "laser",
-      health: 100,
-      speed: 100,
-    },
-  };
+class ShipBuilder {
+  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+    this.ship = new Ship(
+      scene,
+      x,
+      y,
+      spriteSheet,
+      spriteName,
+      collidesWithWorld
+    );
+  }
 
-  return ships[shipName];
-};
+  addHealth(health) {
+    this.ship.addHealth(health);
+    return this;
+  }
 
-export default function spawnShip(shipName, scene, x, y) {
-  const ship = getShip(shipName);
-  return new Ship(
-    scene,
-    x,
-    y,
-    ship.sprite,
-    ship.leftTurnSprite,
-    ship.rightTurnSprite,
-    ship.projectileType,
-    ship.health,
-    ship.speed
-  );
+  addSpeed(speed) {
+    this.ship.addSpeed(speed);
+    return this;
+  }
+
+  addWeapon(scene, weaponName) {
+    this.ship.addWeapon(scene, weaponName);
+    return this;
+  }
+
+  build() {
+    return this.ship;
+  }
 }
 
 class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(
-    scene,
-    x,
-    y,
-    sprite,
-    leftTurnSprite,
-    rightTurnSprite,
-    projectileType,
-    health,
-    speed
-  ) {
-    super(scene, x, y, "ships", sprite);
+  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+    super(scene, 0, 0, spriteSheet, spriteName);
 
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
-
-    this.leftTurnSprite = leftTurnSprite;
-    this.rightTurnSprite = rightTurnSprite;
-    this.projectileGroup = spawnProjectileGroup(projectileType, scene);
-    this.health = health;
-    this.speed = speed;
-    this.setCollideWorldBounds(true);
-
-    this.scene.anims.create({
-      key: "straight",
-      frames: [{ key: "ships", frame: sprite }],
-      frameRate: 1,
-      repeat: -1,
-    });
-
-    this.scene.anims.create({
-      key: "left",
-      frames: [{ key: "ships", frame: leftTurnSprite }],
-      frameRate: 1,
-      repeat: -1,
-    });
-
-    this.scene.anims.create({
-      key: "right",
-      frames: [{ key: "ships", frame: rightTurnSprite }],
-      frameRate: 1,
-      repeat: -1,
-    });
+    this.container = scene.add.container(x, y, this);
+    this.container.setSize(32, 32);
+    this.physics = scene.physics.add.existing(this.container);
+    this.physics.body.setCollideWorldBounds(collidesWithWorld);
   }
 
-  takeDamage(amount) {
-    this.health -= amount;
+  addHealth(health) {
+    this.health = health;
+  }
 
-    if (this.health <= 0) {
-      this.disableBody(true, true);
+  addSpeed(speed) {
+    this.speed = speed;
+  }
+
+  addWeapon(scene, weaponName) {
+    this.weapon = getWeapon(scene, weaponName, this);
+    this.physics.add(this.weapon);
+    this.container.sendToBack(this.weapon);
+  }
+
+  moveX(x) {
+    this.physics.body.velocity.x = x;
+  }
+
+  moveY(y) {
+    this.physics.body.velocity.y = y;
+  }
+
+  shoot(keySpace, time) {
+    if (this.weapon != null) {
+      this.weapon.use(keySpace, time);
     }
   }
 }

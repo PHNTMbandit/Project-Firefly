@@ -1,8 +1,4 @@
-import spawnShip from "./ships";
-import shipController from "./ship-controller";
-
-let player;
-let enemy;
+import PlayerController from "./player-controller";
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -11,8 +7,8 @@ export default class World1 extends Phaser.Scene {
 
   preload() {
     this.load.multiatlas(
-      "ships",
-      "public/sprites/ships.json",
+      "player-ship",
+      "public/sprites/player-ship.json",
       "public/sprites"
     );
 
@@ -21,37 +17,26 @@ export default class World1 extends Phaser.Scene {
       "public/sprites/projectiles.json",
       "public/sprites"
     );
+
+    this.load.multiatlas(
+      "weapons",
+      "public/sprites/weapons.json",
+      "public/sprites"
+    );
   }
 
   create() {
     this.addInput();
-
-    player = spawnShip(
-      "Proto",
+    this.playerController = new PlayerController(
       this,
       this.scale.width * 0.5,
       this.scale.height - 32
     );
-
-    enemy = spawnShip(
-      "Proto",
-      this,
-      this.scale.width * 0.5,
-      this.scale.height - 150
-    );
-
-    this.physics.add.overlap(
-      enemy,
-      player.projectileGroup,
-      player.projectileGroup.damageTarget,
-      null,
-      this
-    );
   }
 
   update(time) {
-    shipController.moveShip(player, player.speed, this.cursors);
-    shipController.shoot(player, this.keySpace, time);
+    this.playerController.moveShip(this.cursors);
+    this.playerController.shoot(this.keySpace, time);
   }
 
   addInput() {

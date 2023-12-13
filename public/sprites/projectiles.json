@@ -4,1101 +4,534 @@
 			"image": "projectiles.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 512,
-				"h": 10
+				"w": 78,
+				"h": 121
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-0.png",
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-3",
 					"rotated": false,
-					"trimmed": true,
+					"trimmed": false,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 3,
-						"w": 3,
-						"h": 3
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 3,
-						"h": 3
+						"w": 32,
+						"h": 32
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-1.png",
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-8",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 35,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 32
+					},
+					"frame": {
+						"x": 1,
+						"y": 35,
+						"w": 32,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
 						"x": 2,
-						"y": 3,
-						"w": 3,
-						"h": 4
+						"y": 2,
+						"w": 28,
+						"h": 28
 					},
 					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 28,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 2,
+						"y": 2,
+						"w": 28,
+						"h": 28
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 28,
+						"h": 28
+					}
+				},
+				{
+					"filename": "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 65,
+						"y": 1,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 69,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 4,
+						"w": 24,
+						"h": 24
+					},
+					"frame": {
+						"x": 1,
+						"y": 69,
+						"w": 24,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Bullet/Main ship weapon - Projectile - Auto cannon bullet-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 12,
+						"h": 19
+					},
+					"frame": {
+						"x": 65,
+						"y": 22,
+						"w": 12,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
 						"x": 6,
-						"y": 1,
-						"w": 3,
-						"h": 4
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-4.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 2,
-						"w": 5,
-						"h": 4
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
-						"x": 11,
-						"y": 1,
-						"w": 5,
-						"h": 4
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-5.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
 						"x": 1,
-						"y": 2,
-						"w": 6,
-						"h": 4
-					},
-					"frame": {
-						"x": 18,
-						"y": 1,
-						"w": 6,
-						"h": 4
+						"y": 95,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-14.png",
+					"filename": "Energy Ball/Main ship weapon - Projectile - Big Space Gun-5",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 2,
-						"y": 2,
-						"w": 4,
-						"h": 4
+						"x": 6,
+						"y": 6,
+						"w": 20,
+						"h": 20
 					},
 					"frame": {
-						"x": 26,
-						"y": 1,
-						"w": 4,
-						"h": 4
+						"x": 1,
+						"y": 95,
+						"w": 20,
+						"h": 20
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-2.png",
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-0",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 2,
-						"y": 2,
-						"w": 3,
-						"h": 5
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
 					},
 					"frame": {
-						"x": 32,
-						"y": 1,
-						"w": 3,
-						"h": 5
+						"x": 35,
+						"y": 31,
+						"w": 8,
+						"h": 32
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-3.png",
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 2,
-						"y": 2,
-						"w": 4,
-						"h": 5
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
+					},
+					"frame": {
+						"x": 45,
+						"y": 31,
+						"w": 8,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
+					},
+					"frame": {
+						"x": 55,
+						"y": 31,
+						"w": 8,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Bullet/Main ship weapon - Projectile - Auto cannon bullet-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 65,
+						"y": 43,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Bullet/Main ship weapon - Projectile - Auto cannon bullet-3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 7,
+						"w": 12,
+						"h": 18
+					},
+					"frame": {
+						"x": 65,
+						"y": 63,
+						"w": 12,
+						"h": 18
+					}
+				},
+				{
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
+					},
+					"frame": {
+						"x": 27,
+						"y": 69,
+						"w": 8,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
 					},
 					"frame": {
 						"x": 37,
-						"y": 1,
-						"w": 4,
-						"h": 5
+						"y": 65,
+						"w": 8,
+						"h": 32
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-21.png",
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-5",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 2,
-						"w": 5,
-						"h": 5
-					},
-					"frame": {
-						"x": 43,
-						"y": 1,
-						"w": 5,
-						"h": 5
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-28.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 2,
-						"w": 5,
-						"h": 5
-					},
-					"frame": {
-						"x": 50,
-						"y": 1,
-						"w": 5,
-						"h": 5
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-10.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
+						"x": 12,
 						"y": 0,
 						"w": 8,
-						"h": 6
+						"h": 32
+					},
+					"frame": {
+						"x": 47,
+						"y": 65,
+						"w": 8,
+						"h": 32
+					}
+				},
+				{
+					"filename": "Rocket/Main ship weapon - Projectile - Rocket-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 9,
+						"w": 7,
+						"h": 17
+					},
+					"frame": {
+						"x": 23,
+						"y": 103,
+						"w": 7,
+						"h": 17
+					}
+				},
+				{
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 32,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 0,
+						"w": 8,
+						"h": 32
 					},
 					"frame": {
 						"x": 57,
-						"y": 1,
+						"y": 83,
 						"w": 8,
-						"h": 6
+						"h": 32
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-11.png",
+					"filename": "Laser Beam/Main ship weapon - Projectile - Zapper-7",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 0,
+						"x": 12,
 						"y": 0,
 						"w": 8,
-						"h": 6
+						"h": 32
 					},
 					"frame": {
 						"x": 67,
-						"y": 1,
+						"y": 83,
 						"w": 8,
-						"h": 6
+						"h": 32
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-15.png",
+					"filename": "Rocket/Main ship weapon - Projectile - Rocket-1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 1,
-						"w": 6,
-						"h": 6
-					},
-					"frame": {
-						"x": 77,
-						"y": 1,
-						"w": 6,
-						"h": 6
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-16.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 5,
-						"h": 6
-					},
-					"frame": {
-						"x": 85,
-						"y": 1,
-						"w": 5,
-						"h": 6
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-12.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 7
-					},
-					"frame": {
-						"x": 92,
-						"y": 1,
-						"w": 5,
-						"h": 7
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-17.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 6,
-						"h": 7
-					},
-					"frame": {
-						"x": 99,
-						"y": 1,
-						"w": 6,
-						"h": 7
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-23.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 6,
-						"h": 7
-					},
-					"frame": {
-						"x": 107,
-						"y": 1,
-						"w": 6,
-						"h": 7
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-24.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
+						"x": 12,
+						"y": 9,
 						"w": 7,
-						"h": 7
+						"h": 19
 					},
 					"frame": {
-						"x": 115,
-						"y": 1,
+						"x": 37,
+						"y": 99,
 						"w": 7,
-						"h": 7
+						"h": 19
 					}
 				},
 				{
-					"filename": "SpaceShooterAssetPack_Projectiles-34.png",
+					"filename": "Rocket/Main ship weapon - Projectile - Rocket-2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 8,
-						"h": 8
+						"w": 32,
+						"h": 32
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
+						"x": 12,
+						"y": 9,
 						"w": 7,
-						"h": 7
+						"h": 20
 					},
 					"frame": {
-						"x": 124,
-						"y": 1,
+						"x": 46,
+						"y": 99,
 						"w": 7,
-						"h": 7
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-35.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 7,
-						"h": 7
-					},
-					"frame": {
-						"x": 133,
-						"y": 1,
-						"w": 7,
-						"h": 7
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-44.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 7,
-						"h": 7
-					},
-					"frame": {
-						"x": 142,
-						"y": 1,
-						"w": 7,
-						"h": 7
-					}
-				},
-				{
-					"filename": "beams/SpaceShooterAssetPack_Projectiles-16.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 24,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 24,
-						"h": 8
-					},
-					"frame": {
-						"x": 151,
-						"y": 1,
-						"w": 24,
-						"h": 8
-					}
-				},
-				{
-					"filename": "beams/SpaceShooterAssetPack_Projectiles-17.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 24,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 24,
-						"h": 8
-					},
-					"frame": {
-						"x": 177,
-						"y": 1,
-						"w": 24,
-						"h": 8
-					}
-				},
-				{
-					"filename": "beams/SpaceShooterAssetPack_Projectiles-18.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 24,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 24,
-						"h": 8
-					},
-					"frame": {
-						"x": 203,
-						"y": 1,
-						"w": 24,
-						"h": 8
-					}
-				},
-				{
-					"filename": "beams/SpaceShooterAssetPack_Projectiles-19.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 24,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 24,
-						"h": 8
-					},
-					"frame": {
-						"x": 229,
-						"y": 1,
-						"w": 24,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-6.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 255,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-7.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 262,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-8.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 269,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-9.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 279,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-13.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 289,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-18.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 296,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-19.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 303,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-20.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 310,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-22.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 317,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-25.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 327,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-26.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 337,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-27.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 347,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-29.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 5,
-						"h": 8
-					},
-					"frame": {
-						"x": 357,
-						"y": 1,
-						"w": 5,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-30.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 364,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-31.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 374,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-32.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 384,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-33.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 394,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-36.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 404,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-37.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 414,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-38.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 424,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-39.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 434,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-40.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 444,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-41.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 454,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-42.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 464,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-43.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 474,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-45.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 484,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-46.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 8,
-						"h": 8
-					},
-					"frame": {
-						"x": 494,
-						"y": 1,
-						"w": 8,
-						"h": 8
-					}
-				},
-				{
-					"filename": "SpaceShooterAssetPack_Projectiles-47.png",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 8,
-						"h": 8
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 7,
-						"h": 8
-					},
-					"frame": {
-						"x": 504,
-						"y": 1,
-						"w": 7,
-						"h": 8
+						"h": 20
 					}
 				}
 			]
@@ -1107,6 +540,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:1febfa0798b2657c070b8dd99c7f2de0:609f511a91211399655e7e4314b2b60a:9b6e6842273e8724f51d1457138f1678$"
+		"smartupdate": "$TexturePacker:SmartUpdate:b92ff035d9a29ec16b51e471009844ec:4dc0dd49dd10577aed54bda475decc9c:9b6e6842273e8724f51d1457138f1678$"
 	}
 }
