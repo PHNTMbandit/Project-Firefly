@@ -86,40 +86,58 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
     super(
       scene,
       ship.x,
-      ship.y,
+      ship.y - 5,
       "weapons",
       "Big Space Gun/Main Ship - Weapons - Big Space Gun-0"
     );
 
     this.ship = ship;
-    this.fireRate = 200;
-    this.frameRate = 6000;
-    this.fireElapsedTime = 0;
+    this.minProjectScaleFactor = 0.5;
+    this.projectileScaleFactor = this.minProjectScaleFactor;
+    this.maxProjectileScaleFactor = 2;
+    this.projectileScaleRate = 0.01;
     this.projectileGroup = getProjectile(scene, "energy ball");
 
     this.anims.create({
-      key: "use",
+      key: "charging",
       frames: this.anims.generateFrameNames("weapons", {
         prefix: "Big Space Gun/Main Ship - Weapons - Big Space Gun-",
+        end: 6,
+        zeroPad: 1,
+      }),
+    });
+
+    this.anims.create({
+      key: "shoot",
+      frames: this.anims.generateFrameNames("weapons", {
+        prefix: "Big Space Gun/Main Ship - Weapons - Big Space Gun-",
+        start: 7,
         end: 11,
         zeroPad: 1,
       }),
-      frameRate: this.frameRate / this.fireRate,
+    });
+
+    scene.keySpace.on("up", () => {
+      this.anims.play("shoot");
+      const projectile = this.projectileGroup.getProjectile();
+      projectile.setScale(
+        this.projectileScaleFactor,
+        this.projectileScaleFactor
+      );
+      projectile.shoot(this.ship.physics.x, this.ship.physics.y - 20);
+      this.projectileScaleFactor = this.minProjectScaleFactor;
     });
 
     this.scene.add.existing(this);
   }
 
-  use(keySpace, time) {
+  use(keySpace) {
     if (keySpace.isDown) {
-      if (time > this.fireElapsedTime) {
-        this.fireElapsedTime = time + this.fireRate;
-
-        this.anims.play("use");
-        this.projectileGroup
-          .getProjectile()
-          .shoot(this.ship.physics.x, this.ship.physics.y - 20);
+      console.log(this.projectileScaleFactor);
+      if (this.projectileScaleFactor < this.maxProjectileScaleFactor) {
+        this.projectileScaleFactor += this.projectileScaleRate;
       }
+      this.anims.play("charging", true);
     }
   }
 }
