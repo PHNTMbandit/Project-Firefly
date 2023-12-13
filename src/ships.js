@@ -82,15 +82,9 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.physics.body.velocity.y = y;
   }
 
-  shoot(time) {
+  shoot(keySpace, time) {
     if (this.weapon != null) {
-      this.weapon.use(this.physics, time);
-    }
-  }
-
-  stopShooting() {
-    if (this.weapon != null) {
-      this.weapon.disuse();
+      this.weapon.use(keySpace, time);
     }
   }
 }

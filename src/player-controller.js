@@ -22,10 +22,6 @@ export default class PlayerController {
   }
 
   shoot(keySpace, time) {
-    if (keySpace.isDown) {
-      this.player.shoot(time);
-    } else {
-      this.player.stopShooting();
-    }
+    this.player.shoot(keySpace, time);
   }
 }

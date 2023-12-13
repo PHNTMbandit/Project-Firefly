@@ -3,26 +3,27 @@ import getProjectile from "./projectiles";
 export default function getWeapon(scene, name, ship) {
   switch (name) {
     case "auto cannon":
-      return new AutoCannon(scene, ship.x, ship.y);
+      return new AutoCannon(scene, ship);
 
     case "rockets":
-      return new Rockets(scene, ship.x, ship.y);
+      return new Rockets(scene, ship);
 
     case "zapper":
-      return new Zapper(scene, ship.x, ship.y);
+      return new Zapper(scene, ship);
   }
 }
 
 class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, ship) {
     super(
       scene,
-      x,
-      y,
+      ship.x,
+      ship.y,
       "weapons",
-      "Auto Cannons/Main Ship - Weapons - Auto Cannon-0"
+      "Auto Cannon/Main Ship - Weapons - Auto Cannon-0"
     );
 
+    this.ship = ship;
     this.fireRate = 200;
     this.frameRate = 6000;
     this.fireElapsedTime = 0;
@@ -31,7 +32,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     this.anims.create({
       key: "use",
       frames: this.anims.generateFrameNames("weapons", {
-        prefix: "Auto Cannons/Main Ship - Weapons - Auto Cannon-",
+        prefix: "Auto Cannon/Main Ship - Weapons - Auto Cannon-",
         end: 6,
         zeroPad: 1,
       }),
@@ -43,7 +44,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
       frames: [
         {
           key: "weapons",
-          frame: "Auto Cannons/Main Ship - Weapons - Auto Cannon-0",
+          frame: "Auto Cannon/Main Ship - Weapons - Auto Cannon-0",
         },
       ],
       frameRate: 1,
@@ -60,28 +61,35 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
   }
 
-  use(shipBody, time) {
-    if (time > this.fireElapsedTime) {
-      this.fireElapsedTime = time + this.fireRate;
+  use(keySpace, time) {
+    if (keySpace.isDown) {
+      if (time > this.fireElapsedTime) {
+        this.fireElapsedTime = time + this.fireRate;
 
-      this.anims.play("use");
-      this.projectileGroup
-        .getProjectile()
-        .shoot(shipBody.x - 8, shipBody.y - 20);
-      this.projectileGroup
-        .getProjectile()
-        .shoot(shipBody.x + 8, shipBody.y - 20);
+        this.anims.play("use");
+        this.projectileGroup
+          .getProjectile()
+          .shoot(this.ship.physics.x - 8, this.ship.physics.y - 20);
+        this.projectileGroup
+          .getProjectile()
+          .shoot(this.ship.physics.x + 8, this.ship.physics.y - 20);
+      }
     }
   }
-
-  disuse() {}
 }
 
 class Rockets extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
-    super(scene, x, y, "weapons", "Rockets/Main Ship - Weapons - Rockets-0");
+  constructor(scene, ship) {
+    super(
+      scene,
+      ship.x,
+      ship.y,
+      "weapons",
+      "Rockets/Main Ship - Weapons - Rockets-0"
+    );
 
-    this.fireRate = 200;
+    this.ship = ship;
+    this.fireRate = 600;
     this.frameRate = 6000;
     this.fireElapsedTime = 0;
     this.projectileGroup = getProjectile(scene, "rocket");
@@ -93,33 +101,79 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
         end: 15,
         zeroPad: 1,
       }),
+      showOnStart: true,
+      hideOnComplete: true,
       frameRate: this.frameRate / this.fireRate,
     });
+
+    this.on(
+      Phaser.Animations.Events.ANIMATION_UPDATE,
+      function (anim, frame, gameObject) {
+        switch (frame.index) {
+          case 2:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x - 6, this.ship.physics.y - 10);
+            break;
+
+          case 4:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x + 6, this.ship.physics.y - 10);
+            break;
+
+          case 6:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x - 10, this.ship.physics.y);
+            break;
+
+          case 8:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x + 10, this.ship.physics.y);
+            break;
+
+          case 10:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x - 14, this.ship.physics.y);
+            break;
+
+          case 12:
+            this.projectileGroup
+              .getProjectile()
+              .shoot(this.ship.physics.x + 14, this.ship.physics.y);
+            break;
+        }
+      }
+    );
 
     this.scene.add.existing(this);
   }
 
-  use(shipBody, time) {
-    if (time > this.fireElapsedTime) {
-      this.fireElapsedTime = time + this.fireRate;
+  use(keySpace, time) {
+    if (keySpace.isDown) {
+      if (time > this.fireElapsedTime) {
+        this.fireElapsedTime = time + this.fireRate;
 
-      this.anims.play("use");
-      this.projectileGroup
-        .getProjectile()
-        .shoot(shipBody.x - 8, shipBody.y - 20);
-      this.projectileGroup
-        .getProjectile()
-        .shoot(shipBody.x + 8, shipBody.y - 20);
+        this.anims.play("use", true);
+      }
     }
   }
-
-  disuse() {}
 }
 
 class Zapper extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y) {
-    super(scene, x, y, "weapons", "Zapper/Main Ship - Weapons - Zapper-10");
+  constructor(scene, ship) {
+    super(
+      scene,
+      ship.x,
+      ship.y,
+      "weapons",
+      "Zapper/Main Ship - Weapons - Zapper-10"
+    );
 
+    this.ship = ship;
     this.projectileGroup = getProjectile(scene, "laser beam");
     this.laserBeam1 = this.projectileGroup.getProjectile(1);
     this.laserBeam2 = this.projectileGroup.getProjectile(2);
@@ -134,36 +188,20 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
       frameRate: 24,
     });
 
-    this.anims.create({
-      key: "idle",
-      frames: [
-        {
-          key: "weapons",
-          frame: "Zapper/Main Ship - Weapons - Zapper-10",
-        },
-      ],
-      frameRate: 1,
+    scene.keySpace.on("up", () => {
+      this.anims.setProgress(0);
+      this.anims.stop;
     });
-
-    this.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      function () {
-        this.anims.play("idle");
-      },
-      this
-    );
 
     this.scene.add.existing(this);
   }
 
-  use(shipBody) {
-    this.anims.play("use");
-    this.laserBeam1.shoot(shipBody.x - 8, shipBody.y - 33);
-    this.laserBeam2.shoot(shipBody.x + 8, shipBody.y - 33);
-  }
-
-  disuse() {
-    if (this.laserBeam1 != null && this.laserBeam2 != null) {
+  use(keySpace) {
+    if (keySpace.isDown) {
+      this.anims.play("use");
+      this.laserBeam1.shoot(this.ship.physics.x - 8, this.ship.physics.y - 33);
+      this.laserBeam2.shoot(this.ship.physics.x + 8, this.ship.physics.y - 33);
+    } else if (this.laserBeam1 != null && this.laserBeam2 != null) {
       this.laserBeam1.disableBody(true, true);
       this.laserBeam2.disableBody(true, true);
     }

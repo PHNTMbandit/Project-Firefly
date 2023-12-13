@@ -140,6 +140,14 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
+
+    if (this.y <= 0) {
+      this.disableBody(true, true);
+    }
+  }
+
   shoot(x, y) {
     this.anims.play("shoot", true);
     this.enableBody(true, x, y, true, true);
@@ -161,7 +169,7 @@ class RocketGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  getProjectile(index) {
+  getProjectile() {
     return this.getFirstDead(false);
   }
 }
