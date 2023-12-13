@@ -5,6 +5,9 @@ export default function getWeapon(scene, name, ship) {
     case "auto cannon":
       return new AutoCannon(scene, ship);
 
+    case "big space gun":
+      return new BigSpaceGun(scene, ship);
+
     case "rockets":
       return new Rockets(scene, ship);
 
@@ -73,6 +76,49 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
         this.projectileGroup
           .getProjectile()
           .shoot(this.ship.physics.x + 8, this.ship.physics.y - 20);
+      }
+    }
+  }
+}
+
+class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, ship) {
+    super(
+      scene,
+      ship.x,
+      ship.y,
+      "weapons",
+      "Big Space Gun/Main Ship - Weapons - Big Space Gun-0"
+    );
+
+    this.ship = ship;
+    this.fireRate = 200;
+    this.frameRate = 6000;
+    this.fireElapsedTime = 0;
+    this.projectileGroup = getProjectile(scene, "energy ball");
+
+    this.anims.create({
+      key: "use",
+      frames: this.anims.generateFrameNames("weapons", {
+        prefix: "Big Space Gun/Main Ship - Weapons - Big Space Gun-",
+        end: 11,
+        zeroPad: 1,
+      }),
+      frameRate: this.frameRate / this.fireRate,
+    });
+
+    this.scene.add.existing(this);
+  }
+
+  use(keySpace, time) {
+    if (keySpace.isDown) {
+      if (time > this.fireElapsedTime) {
+        this.fireElapsedTime = time + this.fireRate;
+
+        this.anims.play("use");
+        this.projectileGroup
+          .getProjectile()
+          .shoot(this.ship.physics.x, this.ship.physics.y - 20);
       }
     }
   }

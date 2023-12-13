@@ -3,6 +3,9 @@ export default function getProjectile(scene, name) {
     case "bullet":
       return new BulletGroup(scene);
 
+    case "energy ball":
+      return new EnergyBallGroup(scene);
+
     case "laser beam":
       return new LaserBeamGroup(scene);
 
@@ -59,6 +62,65 @@ class BulletGroup extends Phaser.Physics.Arcade.Group {
       classType: Bullet,
       key: "projectiles",
       frame: "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0",
+      frameQuantity: 100,
+      active: false,
+      visible: false,
+    });
+  }
+
+  getProjectile() {
+    return this.getFirstDead(false);
+  }
+}
+
+class EnergyBall extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y) {
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0"
+    );
+
+    this.speed = 350;
+
+    this.anims.create({
+      key: "shoot",
+      frames: this.anims.generateFrameNames("projectiles", {
+        prefix: "Energy Ball/Main ship weapon - Projectile - Big Space Gun-",
+        end: 9,
+        zeroPad: 1,
+      }),
+      frameRate: 10,
+      repeat: -1,
+      showOnStart: true,
+    });
+  }
+
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
+
+    if (this.y <= 0) {
+      this.disableBody(true, true);
+    }
+  }
+
+  shoot(x, y) {
+    this.anims.play("shoot");
+    this.enableBody(true, x, y, true, true);
+    this.setVelocityY(-this.speed);
+  }
+}
+
+class EnergyBallGroup extends Phaser.Physics.Arcade.Group {
+  constructor(scene) {
+    super(scene.physics.world, scene);
+
+    this.createMultiple({
+      classType: EnergyBall,
+      key: "projectiles",
+      frame: "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0",
       frameQuantity: 100,
       active: false,
       visible: false,
