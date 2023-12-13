@@ -5,6 +5,9 @@ export default function getProjectile(scene, name) {
 
     case "laser beam":
       return new LaserBeamGroup(scene);
+
+    case "rocket":
+      return new RocketGroup(scene);
   }
 }
 
@@ -18,6 +21,8 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0"
     );
 
+    this.speed = 350;
+
     this.anims.create({
       key: "shoot",
       frames: this.anims.generateFrameNames("projectiles", {
@@ -29,8 +34,6 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       repeat: -1,
       showOnStart: true,
     });
-
-    this.speed = 350;
   }
 
   preUpdate(time, delta) {
@@ -86,15 +89,6 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 10,
     });
-
-    scene.add.tileSprite(
-      x,
-      y,
-      500,
-      0,
-      "projectiles",
-      "Laser Beam/Main ship weapon - Projectile - Zapper-0"
-    );
   }
 
   shoot(x, y) {
@@ -114,10 +108,60 @@ class LaserBeamGroup extends Phaser.Physics.Arcade.Group {
       frameQuantity: 6,
       active: false,
       visible: false,
+      "setScale.y": 1,
+      //  "setOrigin.y": 0.95,
     });
   }
 
   getProjectile(index) {
     return this.children.getArray().at(index);
+  }
+}
+
+class Rocket extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y) {
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Rocket/Main ship weapon - Projectile - Rocket-0"
+    );
+    this.speed = 350;
+
+    this.anims.create({
+      key: "shoot",
+      frames: this.anims.generateFrameNames("projectiles", {
+        prefix: "Rocket/Main ship weapon - Projectile - Rocket-",
+        end: 2,
+        zeroPad: 1,
+      }),
+      frameRate: 10,
+    });
+  }
+
+  shoot(x, y) {
+    this.anims.play("shoot", true);
+    this.enableBody(true, x, y, true, true);
+    this.setVelocityY(-this.speed);
+  }
+}
+
+class RocketGroup extends Phaser.Physics.Arcade.Group {
+  constructor(scene) {
+    super(scene.physics.world, scene);
+
+    this.createMultiple({
+      classType: Rocket,
+      key: "projectiles",
+      frame: "Rocket/Main ship weapon - Projectile - Rocket-0",
+      frameQuantity: 100,
+      active: false,
+      visible: false,
+    });
+  }
+
+  getProjectile(index) {
+    return this.getFirstDead(false);
   }
 }

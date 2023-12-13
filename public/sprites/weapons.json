@@ -4,13 +4,13 @@
 			"image": "weapons.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 61,
-				"h": 351
+				"w": 64,
+				"h": 408
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-4",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-4",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -18,20 +18,20 @@
 						"h": 48
 					},
 					"spriteSourceSize": {
-						"x": 8,
-						"y": 4,
-						"w": 31,
-						"h": 29
+						"x": 6,
+						"y": 12,
+						"w": 36,
+						"h": 26
 					},
 					"frame": {
 						"x": 0,
 						"y": 0,
-						"w": 31,
-						"h": 29
+						"w": 36,
+						"h": 26
 					}
 				},
 				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-3",
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-3",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -45,14 +45,35 @@
 						"h": 29
 					},
 					"frame": {
-						"x": 0,
-						"y": 29,
+						"x": 36,
+						"y": 0,
 						"w": 28,
 						"h": 29
 					}
 				},
 				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-2",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 12,
+						"w": 36,
+						"h": 26
+					},
+					"frame": {
+						"x": 0,
+						"y": 26,
+						"w": 36,
+						"h": 26
+					}
+				},
+				{
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -66,14 +87,35 @@
 						"h": 28
 					},
 					"frame": {
-						"x": 31,
-						"y": 0,
+						"x": 36,
+						"y": 29,
 						"w": 26,
 						"h": 28
 					}
 				},
 				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-1",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-8",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 12,
+						"w": 36,
+						"h": 26
+					},
+					"frame": {
+						"x": 0,
+						"y": 52,
+						"w": 36,
+						"h": 26
+					}
+				},
+				{
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -87,1064 +129,749 @@
 						"h": 26
 					},
 					"frame": {
-						"x": 0,
-						"y": 58,
+						"x": 36,
+						"y": 57,
 						"w": 26,
 						"h": 26
 					}
 				},
 				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-0",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-9",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
 						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 84,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-8",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 84,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 108,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 132,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-3",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 156,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-4",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 156,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 156,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 180,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-7",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 8,
-						"w": 26,
-						"h": 24
-					},
-					"frame": {
-						"x": 0,
-						"y": 180,
-						"w": 26,
-						"h": 24
-					}
-				},
-				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 10,
-						"w": 29,
-						"h": 23
-					},
-					"frame": {
-						"x": 0,
-						"y": 204,
-						"w": 29,
-						"h": 23
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-13",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 10,
-						"w": 26,
-						"h": 22
-					},
-					"frame": {
-						"x": 0,
-						"y": 227,
-						"w": 26,
-						"h": 22
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-11",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 11,
-						"w": 26,
-						"h": 21
-					},
-					"frame": {
-						"x": 0,
-						"y": 249,
-						"w": 26,
-						"h": 21
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-12",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 11,
-						"w": 26,
-						"h": 21
-					},
-					"frame": {
-						"x": 0,
-						"y": 249,
-						"w": 26,
-						"h": 21
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-9",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 12,
-						"w": 26,
-						"h": 20
-					},
-					"frame": {
-						"x": 0,
-						"y": 270,
-						"w": 26,
-						"h": 20
-					}
-				},
-				{
-					"filename": "zapper/Main Ship - Weapons - Zapper-10",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 12,
-						"w": 26,
-						"h": 20
-					},
-					"frame": {
-						"x": 0,
-						"y": 270,
-						"w": 26,
-						"h": 20
-					}
-				},
-				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 14,
-						"w": 26,
-						"h": 19
-					},
-					"frame": {
-						"x": 0,
-						"y": 290,
-						"w": 26,
-						"h": 19
-					}
-				},
-				{
-					"filename": "auto-cannons/Main Ship - Weapons - Auto Cannon-6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 11,
-						"y": 14,
-						"w": 26,
-						"h": 19
-					},
-					"frame": {
-						"x": 0,
-						"y": 309,
-						"w": 26,
-						"h": 19
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-4",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 15,
-						"w": 14,
-						"h": 23
-					},
-					"frame": {
-						"x": 0,
-						"y": 328,
-						"w": 14,
-						"h": 23
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-9",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 4,
-						"y": 15,
-						"w": 14,
-						"h": 23
-					},
-					"frame": {
-						"x": 14,
-						"y": 328,
-						"w": 14,
-						"h": 23
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-8",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 12,
-						"w": 17,
-						"h": 26
-					},
-					"frame": {
-						"x": 28,
-						"y": 29,
-						"w": 17,
-						"h": 26
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 6,
 						"y": 13,
-						"w": 16,
-						"h": 25
-					},
-					"frame": {
-						"x": 45,
-						"y": 28,
-						"w": 16,
-						"h": 25
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-11",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 2,
-						"y": 13,
-						"w": 16,
-						"h": 25
-					},
-					"frame": {
-						"x": 45,
-						"y": 53,
-						"w": 16,
-						"h": 25
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-7",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 15,
-						"y": 13,
-						"w": 19,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 58,
-						"w": 19,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-13",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 12,
-						"w": 17,
+						"w": 36,
 						"h": 26
 					},
 					"frame": {
-						"x": 26,
-						"y": 80,
-						"w": 17,
-						"h": 26
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-10",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 13,
-						"w": 17,
-						"h": 25
-					},
-					"frame": {
-						"x": 26,
-						"y": 106,
-						"w": 17,
-						"h": 25
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-15",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 1,
-						"y": 13,
-						"w": 17,
-						"h": 25
-					},
-					"frame": {
-						"x": 26,
-						"y": 131,
-						"w": 17,
-						"h": 25
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-16",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 12,
-						"w": 14,
-						"h": 26
-					},
-					"frame": {
-						"x": 26,
-						"y": 156,
-						"w": 14,
-						"h": 26
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-0",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 182,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 29,
-						"y": 204,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-18",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 15,
-						"w": 15,
-						"h": 24
-					},
-					"frame": {
-						"x": 46,
+						"x": 0,
 						"y": 78,
-						"w": 15,
+						"w": 36,
+						"h": 26
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 83,
+						"w": 26,
 						"h": 24
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-23",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-8",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 15,
-						"w": 15,
+						"x": 11,
+						"y": 8,
+						"w": 26,
 						"h": 24
 					},
 					"frame": {
-						"x": 46,
-						"y": 102,
-						"w": 15,
+						"x": 36,
+						"y": 83,
+						"w": 26,
 						"h": 24
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-0",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-10",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 6,
-						"y": 16,
-						"w": 15,
-						"h": 22
-					},
-					"frame": {
-						"x": 46,
-						"y": 126,
-						"w": 15,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-1",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 16,
-						"w": 15,
-						"h": 22
-					},
-					"frame": {
-						"x": 46,
-						"y": 148,
-						"w": 15,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-3",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 16,
-						"w": 15,
-						"h": 22
-					},
-					"frame": {
-						"x": 46,
-						"y": 148,
-						"w": 15,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 16,
-						"w": 15,
-						"h": 22
-					},
-					"frame": {
-						"x": 46,
-						"y": 148,
-						"w": 15,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 17,
-						"w": 15,
-						"h": 21
-					},
-					"frame": {
-						"x": 46,
-						"y": 170,
-						"w": 15,
-						"h": 21
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-14",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 13,
-						"w": 12,
-						"h": 25
-					},
-					"frame": {
-						"x": 49,
-						"y": 191,
-						"w": 12,
-						"h": 25
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-19",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 6,
-						"y": 13,
-						"w": 12,
-						"h": 25
-					},
-					"frame": {
-						"x": 49,
-						"y": 216,
-						"w": 12,
-						"h": 25
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-2",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 29,
-						"y": 226,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-3",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 248,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-7",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 3,
-						"y": 17,
-						"w": 15,
-						"h": 21
-					},
-					"frame": {
-						"x": 46,
-						"y": 248,
-						"w": 15,
-						"h": 21
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-4",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 270,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-5",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 270,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-6",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 48,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 14,
-						"y": 7,
-						"w": 20,
-						"h": 22
-					},
-					"frame": {
-						"x": 26,
-						"y": 292,
-						"w": 20,
-						"h": 22
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-21",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 4,
 						"y": 12,
-						"w": 14,
+						"w": 36,
 						"h": 26
 					},
 					"frame": {
-						"x": 46,
-						"y": 269,
-						"w": 14,
+						"x": 0,
+						"y": 104,
+						"w": 36,
 						"h": 26
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-12",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-1",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 107,
+						"w": 26,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 6,
-						"y": 15,
-						"w": 10,
-						"h": 23
+						"y": 13,
+						"w": 36,
+						"h": 25
 					},
 					"frame": {
-						"x": 46,
-						"y": 295,
-						"w": 10,
-						"h": 23
+						"x": 0,
+						"y": 130,
+						"w": 36,
+						"h": 25
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-20",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-2",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 131,
+						"w": 26,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 6,
-						"y": 19,
-						"w": 6,
-						"h": 10
+						"y": 13,
+						"w": 36,
+						"h": 25
 					},
 					"frame": {
-						"x": 40,
-						"y": 156,
-						"w": 6,
-						"h": 10
+						"x": 0,
+						"y": 155,
+						"w": 36,
+						"h": 25
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-25",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-3",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
-						"x": 12,
-						"y": 19,
-						"w": 6,
-						"h": 10
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
 					},
 					"frame": {
-						"x": 40,
-						"y": 166,
-						"w": 6,
-						"h": 10
+						"x": 36,
+						"y": 155,
+						"w": 26,
+						"h": 24
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-24",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-4",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
-						"x": 3,
-						"y": 16,
-						"w": 13,
-						"h": 7
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
 					},
 					"frame": {
-						"x": 26,
-						"y": 314,
-						"w": 13,
-						"h": 7
+						"x": 36,
+						"y": 155,
+						"w": 26,
+						"h": 24
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-28",
+					"filename": "Zapper/Main Ship - Weapons - Zapper-5",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 155,
+						"w": 26,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 179,
+						"w": 26,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 8,
+						"w": 26,
+						"h": 24
+					},
+					"frame": {
+						"x": 36,
+						"y": 179,
+						"w": 26,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-7",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 13,
+						"w": 36,
+						"h": 25
+					},
+					"frame": {
+						"x": 0,
+						"y": 180,
+						"w": 36,
+						"h": 25
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-13",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 10,
+						"w": 26,
+						"h": 22
+					},
+					"frame": {
+						"x": 36,
+						"y": 203,
+						"w": 26,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 8,
-						"y": 16,
-						"w": 13,
-						"h": 7
+						"y": 4,
+						"w": 31,
+						"h": 29
 					},
 					"frame": {
-						"x": 26,
-						"y": 314,
-						"w": 13,
-						"h": 7
+						"x": 0,
+						"y": 205,
+						"w": 31,
+						"h": 29
 					}
 				},
 				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-8",
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 10,
+						"w": 29,
+						"h": 23
+					},
+					"frame": {
+						"x": 31,
+						"y": 225,
+						"w": 29,
+						"h": 23
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-11",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 11,
+						"w": 26,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 234,
+						"w": 26,
+						"h": 21
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-12",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 11,
+						"w": 26,
+						"h": 21
+					},
+					"frame": {
+						"x": 0,
+						"y": 234,
+						"w": 26,
+						"h": 21
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-11",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 15,
+						"w": 37,
+						"h": 24
+					},
+					"frame": {
+						"x": 26,
+						"y": 248,
+						"w": 37,
+						"h": 24
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-9",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 12,
+						"w": 26,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 255,
+						"w": 26,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Zapper/Main Ship - Weapons - Zapper-10",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 12,
+						"w": 26,
+						"h": 20
+					},
+					"frame": {
+						"x": 0,
+						"y": 255,
+						"w": 26,
+						"h": 20
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 15,
+						"w": 36,
+						"h": 23
+					},
+					"frame": {
+						"x": 26,
+						"y": 272,
+						"w": 36,
+						"h": 23
+					}
+				},
+				{
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 14,
+						"w": 26,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 275,
+						"w": 26,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Auto Cannon/Main Ship - Weapons - Auto Cannon-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 11,
+						"y": 14,
+						"w": 26,
+						"h": 19
+					},
+					"frame": {
+						"x": 0,
+						"y": 294,
+						"w": 26,
+						"h": 19
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 36,
+						"h": 22
+					},
+					"frame": {
+						"x": 26,
+						"y": 295,
+						"w": 36,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 313,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 16,
+						"w": 36,
+						"h": 22
+					},
+					"frame": {
+						"x": 20,
+						"y": 317,
+						"w": 36,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 335,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-12",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 16,
+						"w": 39,
+						"h": 13
+					},
+					"frame": {
+						"x": 20,
+						"y": 339,
+						"w": 39,
+						"h": 13
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 20,
+						"y": 352,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 0,
+						"y": 357,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 40,
+						"y": 352,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 40,
+						"y": 352,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 7,
+						"w": 20,
+						"h": 22
+					},
+					"frame": {
+						"x": 20,
+						"y": 374,
+						"w": 20,
+						"h": 22
+					}
+				},
+				{
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-8",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1158,14 +885,14 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 28,
-						"y": 321,
+						"x": 0,
+						"y": 379,
 						"w": 20,
 						"h": 22
 					}
 				},
 				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-9",
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-9",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1179,14 +906,14 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 28,
-						"y": 321,
+						"x": 0,
+						"y": 379,
 						"w": 20,
 						"h": 22
 					}
 				},
 				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-10",
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-10",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1200,14 +927,14 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 28,
-						"y": 321,
+						"x": 0,
+						"y": 379,
 						"w": 20,
 						"h": 22
 					}
 				},
 				{
-					"filename": "big-space-gun/Main Ship - Weapons - Big Space Gun-11",
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-11",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
@@ -1221,114 +948,93 @@
 						"h": 22
 					},
 					"frame": {
-						"x": 28,
-						"y": 321,
+						"x": 0,
+						"y": 379,
 						"w": 20,
 						"h": 22
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-17",
+					"filename": "Big Space Gun/Main Ship - Weapons - Big Space Gun-7",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
-						"x": 8,
-						"y": 15,
-						"w": 10,
-						"h": 23
+						"x": 15,
+						"y": 13,
+						"w": 19,
+						"h": 22
 					},
 					"frame": {
-						"x": 48,
-						"y": 318,
-						"w": 10,
-						"h": 23
+						"x": 40,
+						"y": 374,
+						"w": 19,
+						"h": 22
 					}
 				},
 				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-26",
+					"filename": "Rockets/Main Ship - Weapons - Rockets-13",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
+						"w": 48,
 						"h": 48
 					},
 					"spriteSourceSize": {
 						"x": 2,
+						"y": 17,
+						"w": 41,
+						"h": 7
+					},
+					"frame": {
+						"x": 20,
+						"y": 396,
+						"w": 41,
+						"h": 7
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-14",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 32,
+						"y": 16,
+						"w": 13,
+						"h": 7
+					},
+					"frame": {
+						"x": 0,
+						"y": 401,
+						"w": 13,
+						"h": 7
+					}
+				},
+				{
+					"filename": "Rockets/Main Ship - Weapons - Rockets-15",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 48
+					},
+					"spriteSourceSize": {
+						"x": 31,
 						"y": 19,
 						"w": 15,
 						"h": 5
 					},
 					"frame": {
-						"x": 28,
-						"y": 343,
+						"x": 13,
+						"y": 403,
 						"w": 15,
-						"h": 5
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-29",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 7,
-						"y": 19,
-						"w": 15,
-						"h": 5
-					},
-					"frame": {
-						"x": 28,
-						"y": 343,
-						"w": 15,
-						"h": 5
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-22",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 5,
-						"y": 17,
-						"w": 9,
-						"h": 5
-					},
-					"frame": {
-						"x": 49,
-						"y": 241,
-						"w": 9,
-						"h": 5
-					}
-				},
-				{
-					"filename": "rockets/Main Ship - Weapons - Rockets-27",
-					"rotated": false,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 48
-					},
-					"spriteSourceSize": {
-						"x": 10,
-						"y": 17,
-						"w": 9,
-						"h": 5
-					},
-					"frame": {
-						"x": 49,
-						"y": 241,
-						"w": 9,
 						"h": 5
 					}
 				}
@@ -1338,6 +1044,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:525bff6ffdc82f8ec5eb34de256478fb:947d711fa43b4302697505786e351efe:ba48453f8b2235fdb166a51105f49255$"
+		"smartupdate": "$TexturePacker:SmartUpdate:9612168fe62eacdecb34ec876cbb98bf:aed6379760277493331ef8f4031f25db:ba48453f8b2235fdb166a51105f49255$"
 	}
 }

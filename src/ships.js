@@ -13,7 +13,7 @@ export default function getShip(scene, x, y, shipName) {
       )
         .addHealth(100)
         .addSpeed(100)
-        .addWeapon(scene, "zapper")
+        .addWeapon(scene, "rockets")
         .build();
   }
 }
