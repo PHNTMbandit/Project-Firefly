@@ -8,7 +8,7 @@ export default class World1 extends Phaser.Scene {
 
   preload() {
     this.load.multiatlas(
-      "kla'ed",
+      "Kla'ed",
       "public/sprites/kla'ed.json",
       "public/sprites"
     );

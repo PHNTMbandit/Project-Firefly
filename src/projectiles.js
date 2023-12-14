@@ -57,7 +57,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         end: 3,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
       showOnStart: true,
     });
@@ -101,7 +101,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
         end: 9,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
       showOnStart: true,
     });
@@ -144,7 +144,7 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
         end: 7,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
     });
   }
 
@@ -174,7 +174,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         end: 2,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
     });
 
     scene.physics.add.existing(this);

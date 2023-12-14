@@ -21,26 +21,19 @@ export default function getShip(scene, x, y, shipName) {
         scene,
         x,
         y,
-        "kla'ed",
+        "Kla'ed",
         "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
         true
       )
-        .addHealth(100)
+        .addDestruction("Kla'ed", "Battlecruiser", 13)
+        .addHealth(10)
         .addSpeed(100)
         .build();
   }
 }
 
 class ShipBuilder {
-  constructor(
-    scene,
-    x,
-    y,
-    spriteSheet,
-    spriteName,
-
-    collidesWithWorld
-  ) {
+  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
     this.ship = new Ship(
       scene,
       x,
@@ -49,6 +42,11 @@ class ShipBuilder {
       spriteName,
       collidesWithWorld
     );
+  }
+
+  addDestruction(spriteSheet, shipName, frames) {
+    this.ship.addDestructability(spriteSheet, shipName, frames);
+    return this;
   }
 
   addHealth(health) {
@@ -75,10 +73,32 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
     super(scene, 0, 0, spriteSheet, spriteName);
 
+    this.scene.add.existing(this);
     this.ship = scene.add.container(x, y, this);
     this.ship.setSize(this.frame.width, this.frame.height);
-    scene.physics.world.enable(this.ship);
+    this.scene.physics.world.enable(this.ship);
     this.ship.body.setCollideWorldBounds(collidesWithWorld);
+  }
+
+  addDestructability(spriteSheet, shipName, frames) {
+    this.anims.create({
+      key: "destruction",
+      frames: this.anims.generateFrameNames(spriteSheet, {
+        prefix: `${shipName}/Destruction/${spriteSheet} - ${shipName} - Destruction-`,
+        start: 4,
+        end: frames,
+        zeroPad: 1,
+      }),
+      frameRate: 15,
+    });
+
+    this.on(
+      Phaser.Animations.Events.ANIMATION_COMPLETE,
+      function () {
+        this.ship.destroy();
+      },
+      this
+    );
   }
 
   addHealth(health) {
@@ -114,7 +134,8 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.flashColor(this.scene, 0xffffff, 15 * amount);
 
     if (this.health <= 0) {
-      this.ship.destroy();
+      this.ship.body.checkCollision.none = true;
+      this.anims.play("destruction", true);
     }
   }
 
