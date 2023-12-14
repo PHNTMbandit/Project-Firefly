@@ -13,7 +13,7 @@ export default function getShip(scene, x, y, shipName) {
       )
         .addHealth(100)
         .addSpeed(100)
-        .addWeapon(scene, "big space gun")
+        .addWeapon("auto cannon")
         .build();
   }
 }
@@ -40,8 +40,8 @@ class ShipBuilder {
     return this;
   }
 
-  addWeapon(scene, weaponName) {
-    this.ship.addWeapon(scene, weaponName);
+  addWeapon(weaponName) {
+    this.ship.addWeapon(weaponName);
     return this;
   }
 
@@ -69,8 +69,8 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.speed = speed;
   }
 
-  addWeapon(scene, weaponName) {
-    this.weapon = getWeapon(scene, weaponName, this);
+  addWeapon(weaponName) {
+    this.weapon = getWeapon(this.scene, weaponName, this);
     this.container.add(this.weapon);
     this.physics.add(this.weapon);
     this.container.sendToBack(this.weapon);
@@ -92,8 +92,22 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   takeDamage(amount) {
     this.health -= amount;
+
+    console.log(amount);
+    this.flashColor(this.scene, 0xffffff, 15 * amount);
+
     if (this.health <= 0) {
       this.container.destroy();
     }
+  }
+
+  flashColor(scene, color, delay) {
+    this.setTintFill(color);
+    this.weapon.setTintFill(color);
+
+    scene.time.delayedCall(delay, () => {
+      this.clearTint();
+      this.weapon.clearTint();
+    });
   }
 }

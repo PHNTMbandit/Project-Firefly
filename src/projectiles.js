@@ -92,7 +92,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
       "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0"
     );
 
-    this.damage = 5;
+    this.damage = 10;
     this.speed = 350;
 
     this.anims.create({
