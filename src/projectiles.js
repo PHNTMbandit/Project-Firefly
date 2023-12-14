@@ -19,7 +19,7 @@ var projectileData = function getProjectileData(name) {
     },
     VaxtraBullet: {
       damage: 5,
-      fireRate: 200,
+      fireRate: 700,
       speed: 500,
     },
   };

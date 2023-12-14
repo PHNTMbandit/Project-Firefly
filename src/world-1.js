@@ -72,7 +72,9 @@ export default class World1 extends Phaser.Scene {
   }
 
   update(time) {
-    this.enemy.shoot(time, this.enemy.ship.x - 8, this.enemy.ship.y - 20);
+    if (this.enemy.active) {
+      this.enemy.shoot(time, this.enemy.ship.x, this.enemy.ship.y + 13);
+    }
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);

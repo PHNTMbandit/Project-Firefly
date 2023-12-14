@@ -61,7 +61,12 @@ export default function getShip(scene, x, y, shipName) {
       )
         .addDestruction("Kla'ed", "Scout", 13)
         .addHealth(shipData(shipName).health)
-        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"))
+        .addProjectileGroup(
+          getProjectileGroup(scene, "Vaxtra Bullet"),
+          "Kla'ed",
+          "Scout",
+          5
+        )
         .addSpeed(shipData(shipName).speed)
         .build();
   }
@@ -89,8 +94,13 @@ class ShipBuilder {
     return this;
   }
 
-  addProjectileGroup(projectileGroup) {
-    this.ship.addProjectileGroup(projectileGroup);
+  addProjectileGroup(projectileGroup, spriteSheet, shipName, frames) {
+    this.ship.addProjectileGroup(
+      projectileGroup,
+      spriteSheet,
+      shipName,
+      frames
+    );
     return this;
   }
 
@@ -134,10 +144,12 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     });
 
     this.on(
-      Phaser.Animations.Events.ANIMATION_COMPLETE,
-      function () {
-        this.setActive(false);
-        this.ship.destroy();
+      "animationcomplete",
+      (e) => {
+        if (e.key == "destruction") {
+          this.setActive(false);
+          this.ship.destroy();
+        }
       },
       this
     );
@@ -147,8 +159,19 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.health = health;
   }
 
-  addProjectileGroup(projectileGroup) {
+  addProjectileGroup(projectileGroup, spriteSheet, shipName, frames) {
     this.projectileGroup = projectileGroup;
+    this.frameRate = 6000;
+
+    this.anims.create({
+      key: "shoot",
+      frames: this.anims.generateFrameNames(spriteSheet, {
+        prefix: `${shipName}/Weapon/${spriteSheet} - ${shipName} - Weapons-`,
+        end: frames,
+        zeroPad: 1,
+      }),
+      frameRate: this.frameRate / this.projectileGroup.projectileData.fireRate,
+    });
   }
 
   addSpeed(speed) {
@@ -180,7 +203,6 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
   }
 
   moveY(y) {
-    console.log();
     this.ship.body.velocity.y = y;
   }
 
@@ -188,6 +210,8 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     if (time > this.fireElapsedTime) {
       this.fireElapsedTime =
         time + this.projectileGroup.projectileData.fireRate;
+
+      this.anims.play("shoot");
       this.projectileGroup.shootProjectile(x, y, "down");
     }
   }
