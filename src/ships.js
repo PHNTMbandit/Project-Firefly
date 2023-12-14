@@ -1,4 +1,24 @@
 import getWeapon from "./weapons";
+import getProjectileGroup from "./projectiles";
+
+var shipData = function getProjectileData(name) {
+  const shipData = {
+    Player: {
+      health: 100,
+      speed: 100,
+    },
+    "Vaxtra Battlecruiser": {
+      health: 100,
+      speed: 100,
+    },
+    "Vaxtra Scout": {
+      health: 100,
+      speed: 100,
+    },
+  };
+
+  return shipData[name];
+};
 
 export default function getShip(scene, x, y, shipName) {
   switch (shipName) {
@@ -11,12 +31,12 @@ export default function getShip(scene, x, y, shipName) {
         "Main Ship - Base - Full health.png",
         true
       )
-        .addHealth(100)
-        .addSpeed(100)
-        .addWeapon("auto cannon")
+        .addHealth(shipData(shipName).health)
+        .addSpeed(shipData(shipName).speed)
+        .addWeapon("Auto Cannon")
         .build();
 
-    case "Kla'ed Battlecruiser":
+    case "Vaxtra Battlecruiser":
       return new ShipBuilder(
         scene,
         x,
@@ -26,8 +46,23 @@ export default function getShip(scene, x, y, shipName) {
         true
       )
         .addDestruction("Kla'ed", "Battlecruiser", 13)
-        .addHealth(100)
-        .addSpeed(100)
+        .addHealth(shipData(shipName).health)
+        .addSpeed(shipData(shipName).speed)
+        .build();
+
+    case "Vaxtra Scout":
+      return new ShipBuilder(
+        scene,
+        x,
+        y,
+        "Kla'ed",
+        "Scout/Weapon/Kla'ed - Scout - Weapons-0",
+        true
+      )
+        .addDestruction("Kla'ed", "Scout", 13)
+        .addHealth(shipData(shipName).health)
+        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"))
+        .addSpeed(shipData(shipName).speed)
         .build();
   }
 }
@@ -51,6 +86,11 @@ class ShipBuilder {
 
   addHealth(health) {
     this.ship.addHealth(health);
+    return this;
+  }
+
+  addProjectileGroup(projectileGroup) {
+    this.ship.addProjectileGroup(projectileGroup);
     return this;
   }
 
@@ -78,6 +118,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.ship.setSize(this.frame.width, this.frame.height);
     this.scene.physics.world.enable(this.ship);
     this.ship.body.setCollideWorldBounds(collidesWithWorld);
+    this.fireElapsedTime = 0;
   }
 
   addDestructability(spriteSheet, shipName, frames) {
@@ -95,6 +136,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.on(
       Phaser.Animations.Events.ANIMATION_COMPLETE,
       function () {
+        this.setActive(false);
         this.ship.destroy();
       },
       this
@@ -105,6 +147,10 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.health = health;
   }
 
+  addProjectileGroup(projectileGroup) {
+    this.projectileGroup = projectileGroup;
+  }
+
   addSpeed(speed) {
     this.speed = speed;
   }
@@ -113,30 +159,6 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.weapon = getWeapon(this.scene, weaponName, this);
     this.ship.add(this.weapon);
     this.ship.sendToBack(this.weapon);
-  }
-
-  moveX(x) {
-    this.ship.body.velocity.x = x;
-  }
-
-  moveY(y) {
-    this.ship.body.velocity.y = y;
-  }
-
-  useWeapon(keySpace, time) {
-    if (this.weapon != null) {
-      this.weapon.use(keySpace, time);
-    }
-  }
-
-  takeDamage(amount) {
-    this.health -= amount;
-    this.flashColor(this.scene, 0xffffff, 15 * amount);
-
-    if (this.health <= 0) {
-      this.ship.body.checkCollision.none = true;
-      this.anims.play("destruction", true);
-    }
   }
 
   flashColor(scene, color, delay) {
@@ -151,5 +173,38 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
         this.weapon.clearTint();
       }
     });
+  }
+
+  moveX(x) {
+    this.ship.body.velocity.x = x;
+  }
+
+  moveY(y) {
+    console.log();
+    this.ship.body.velocity.y = y;
+  }
+
+  shoot(time, x, y) {
+    if (time > this.fireElapsedTime) {
+      this.fireElapsedTime =
+        time + this.projectileGroup.projectileData.fireRate;
+      this.projectileGroup.shootProjectile(x, y, "down");
+    }
+  }
+
+  takeDamage(amount) {
+    this.health -= amount;
+    this.flashColor(this.scene, 0xffffff, 15 * amount);
+
+    if (this.health <= 0) {
+      this.ship.body.checkCollision.none = true;
+      this.anims.play("destruction", true);
+    }
+  }
+
+  useWeapon(keySpace, time) {
+    if (this.weapon != null) {
+      this.weapon.use(keySpace, time);
+    }
   }
 }

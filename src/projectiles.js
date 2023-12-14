@@ -1,54 +1,100 @@
-export default function getProjectile(scene, name) {
+var projectileData = function getProjectileData(name) {
+  const projectileData = {
+    AutoCannonBullet: {
+      damage: 5,
+      fireRate: 200,
+      speed: 350,
+    },
+    EnergyBall: {
+      damage: 10,
+      speed: 350,
+    },
+    LaserBeam: {
+      damage: 10,
+    },
+    Rocket: {
+      damage: 5,
+      fireRate: 600,
+      speed: 350,
+    },
+    VaxtraBullet: {
+      damage: 5,
+      fireRate: 200,
+      speed: 500,
+    },
+  };
+
+  return projectileData[name];
+};
+
+export default function getProjectileGroup(scene, name) {
   switch (name) {
-    case "bullet":
-      return new ProjectileGroup(scene, Bullet, 100);
+    case "Auto Cannon Bullet":
+      return new ProjectileGroup(scene, AutoCannonBullet, "projectiles", 100);
 
-    case "energy ball":
-      return new ProjectileGroup(scene, EnergyBall, 100);
+    case "Energy Ball":
+      return new ProjectileGroup(scene, EnergyBall, "projectiles", 100);
 
-    case "laser beam":
-      return new ProjectileGroup(scene, LaserBeam, 100);
+    case "Laser Beam":
+      return new ProjectileGroup(scene, LaserBeam, "projectiles", 100);
 
-    case "rocket":
-      return new ProjectileGroup(scene, Rocket, 100);
+    case "Rocket":
+      return new ProjectileGroup(scene, Rocket, "projectiles", 100);
+
+    case "Vaxtra Bullet":
+      return new ProjectileGroup(scene, VaxtraBullet, "Kla'ed", 100);
   }
 }
 
 class ProjectileGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene, projectile, amount) {
+  constructor(scene, projectile, spriteSheet, amount) {
     super(scene.physics.world, scene);
 
     this.createMultiple({
       classType: projectile,
-      key: "projectiles",
+      key: spriteSheet,
       frameQuantity: amount,
       active: false,
       visible: false,
     });
+
+    this.projectile = projectile;
+    this.projectileData = projectileData(projectile.name);
   }
 
-  getProjectile() {
-    return this.getFirstDead(false);
+  getProjectile(index) {
+    if (index != null) {
+      return this.children.getArray().at(index);
+    } else {
+      return this.getFirstDead(false);
+    }
+  }
+
+  shootProjectile(x, y, direction, scale) {
+    const projectile = this.getFirstDead(false);
+    projectile.setScale(scale);
+    projectile.anims.play("shoot");
+    projectile.enableBody(true, x, y, true, true);
+
+    if (direction == "up") {
+      projectile.setVelocityY(-this.projectileData.speed);
+    } else if (direction == "down") {
+      projectile.setFlipY(true);
+      projectile.setVelocityY(this.projectileData.speed);
+    }
   }
 
   dealDamage(target, projectile) {
-    target.first.takeDamage(projectile.damage);
+    target.first.takeDamage(
+      projectileData(projectile.constructor.name).damage * projectile.scale
+    );
     projectile.disableBody(true, true);
   }
 }
 
-class Bullet extends Phaser.Physics.Arcade.Sprite {
+class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(
-      scene,
-      x,
-      y,
-      "projectiles",
-      "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0"
-    );
-
-    this.damage = 5;
-    this.speed = 350;
+    super(scene, x, y, "projectiles");
 
     this.anims.create({
       key: "shoot",
@@ -73,26 +119,11 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       this.disableBody(true, true);
     }
   }
-
-  shoot(x, y) {
-    this.anims.play("shoot");
-    this.enableBody(true, x, y, true, true);
-    this.setVelocityY(-this.speed);
-  }
 }
 
 class EnergyBall extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(
-      scene,
-      x,
-      y,
-      "projectiles",
-      "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0"
-    );
-
-    this.damage = 10;
-    this.speed = 350;
+    super(scene, x, y, "projectiles");
 
     this.anims.create({
       key: "shoot",
@@ -117,25 +148,11 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
       this.disableBody(true, true);
     }
   }
-
-  shoot(x, y) {
-    this.anims.play("shoot");
-    this.enableBody(true, x, y, true, true);
-    this.setVelocityY(-this.speed);
-  }
 }
 
 class LaserBeam extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(
-      scene,
-      x,
-      y,
-      "projectiles",
-      "Laser Beam/Main ship weapon - Projectile - Zapper-0"
-    );
-
-    this.damage = 5;
+    super(scene, x, y, "projectiles");
 
     this.anims.create({
       key: "shoot",
@@ -147,25 +164,11 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
       frameRate: 15,
     });
   }
-
-  shoot(x, y) {
-    this.anims.play("shoot", true);
-    this.enableBody(true, x, y, true, true);
-  }
 }
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(
-      scene,
-      x,
-      y,
-      "projectiles",
-      "Rocket/Main ship weapon - Projectile - Rocket-0"
-    );
-
-    this.damage = 15;
-    this.speed = 350;
+    super(scene, x, y, "projectiles");
 
     this.anims.create({
       key: "shoot",
@@ -175,6 +178,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         zeroPad: 1,
       }),
       frameRate: 15,
+      repeat: -1,
+      showOnStart: true,
     });
 
     scene.physics.add.existing(this);
@@ -188,10 +193,37 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
       this.disableBody(true, true);
     }
   }
+}
 
-  shoot(x, y) {
-    this.anims.play("shoot", true);
-    this.enableBody(true, x, y, true, true);
-    this.setVelocityY(-this.speed);
+class VaxtraBullet extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y) {
+    super(scene, x, y, "Kla'ed");
+
+    this.anims.create({
+      key: "shoot",
+      frames: this.anims.generateFrameNames("Kla'ed", {
+        prefix: "Projectiles/Bullet/Kla'ed - Bullet-",
+        end: 7,
+        zeroPad: 1,
+      }),
+      frameRate: 15,
+      repeat: -1,
+      showOnStart: true,
+    });
+
+    scene.physics.add.existing(this);
+    this.setCollideWorldBounds(true);
+    this.body.setSize(this.frame.width, this.frame.height, true);
+    this.body.world.on("worldbounds", () => {
+      console.log("hi");
+    });
+  }
+
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
+
+    if (this.y <= 0 || this.y >= this.scene.scale.height + 50) {
+      this.disableBody(true, true);
+    }
   }
 }

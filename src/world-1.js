@@ -58,8 +58,8 @@ export default class World1 extends Phaser.Scene {
     this.enemy = getShip(
       this,
       this.scale.width * 0.5,
-      +50,
-      "Kla'ed Battlecruiser"
+      50,
+      "Vaxtra Scout"
     ).setFlipY(true);
 
     this.physics.add.overlap(
@@ -72,6 +72,7 @@ export default class World1 extends Phaser.Scene {
   }
 
   update(time) {
+    this.enemy.shoot(time, this.enemy.ship.x - 8, this.enemy.ship.y - 20);
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);
