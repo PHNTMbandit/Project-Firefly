@@ -1,3 +1,4 @@
+import getShip from "./ships";
 import PlayerController from "./player-controller";
 
 export default class World1 extends Phaser.Scene {
@@ -31,6 +32,16 @@ export default class World1 extends Phaser.Scene {
       this,
       this.scale.width * 0.5,
       this.scale.height - 32
+    );
+
+    this.enemy = getShip(this, this.scale.width * 0.5, +50, "player");
+
+    this.physics.add.overlap(
+      this.enemy.physics,
+      this.playerController.player.weapon.projectileGroup,
+      this.playerController.player.weapon.projectileGroup.dealDamage,
+      null,
+      this
     );
   }
 

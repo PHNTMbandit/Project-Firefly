@@ -24,6 +24,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0"
     );
 
+    this.damage = 5;
     this.speed = 350;
 
     this.anims.create({
@@ -37,6 +38,9 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
       repeat: -1,
       showOnStart: true,
     });
+
+    scene.physics.add.existing(this);
+    this.body.setSize(10, 10, true);
   }
 
   preUpdate(time, delta) {
@@ -71,6 +75,11 @@ class BulletGroup extends Phaser.Physics.Arcade.Group {
   getProjectile() {
     return this.getFirstDead(false);
   }
+
+  dealDamage(target, projectile) {
+    target.ship.takeDamage(projectile.damage);
+    projectile.disableBody(true, true);
+  }
 }
 
 class EnergyBall extends Phaser.Physics.Arcade.Sprite {
@@ -83,6 +92,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
       "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0"
     );
 
+    this.damage = 10;
     this.speed = 350;
 
     this.anims.create({
@@ -96,6 +106,9 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
       repeat: -1,
       showOnStart: true,
     });
+
+    scene.physics.add.existing(this);
+    this.body.setSize(10, 10, true);
   }
 
   preUpdate(time, delta) {
@@ -130,6 +143,11 @@ class EnergyBallGroup extends Phaser.Physics.Arcade.Group {
   getProjectile() {
     return this.getFirstDead(false);
   }
+
+  dealDamage(target, projectile) {
+    target.ship.takeDamage(projectile.damage * projectile.scale);
+    projectile.disableBody(true, true);
+  }
 }
 
 class LaserBeam extends Phaser.Physics.Arcade.Sprite {
@@ -141,6 +159,8 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
       "projectiles",
       "Laser Beam/Main ship weapon - Projectile - Zapper-0"
     );
+
+    this.damage = 5;
 
     this.anims.create({
       key: "shoot",
@@ -178,6 +198,11 @@ class LaserBeamGroup extends Phaser.Physics.Arcade.Group {
   getProjectile(index) {
     return this.children.getArray().at(index);
   }
+
+  dealDamage(target, projectile) {
+    target.ship.takeDamage(projectile.damage);
+    projectile.disableBody(true, true);
+  }
 }
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
@@ -189,6 +214,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
       "projectiles",
       "Rocket/Main ship weapon - Projectile - Rocket-0"
     );
+
+    this.damage = 15;
     this.speed = 350;
 
     this.anims.create({
@@ -200,6 +227,9 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
       }),
       frameRate: 10,
     });
+
+    scene.physics.add.existing(this);
+    this.body.setSize(10, 10, true);
   }
 
   preUpdate(time, delta) {
@@ -233,5 +263,10 @@ class RocketGroup extends Phaser.Physics.Arcade.Group {
 
   getProjectile() {
     return this.getFirstDead(false);
+  }
+
+  dealDamage(target, projectile) {
+    target.ship.takeDamage(projectile.damage);
+    projectile.disableBody(true, true);
   }
 }
