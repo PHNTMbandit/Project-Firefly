@@ -2,7 +2,7 @@ import getWeapon from "./weapons";
 
 export default function getShip(scene, x, y, shipName) {
   switch (shipName) {
-    case "player":
+    case "Player":
       return new ShipBuilder(
         scene,
         x,
@@ -16,7 +16,7 @@ export default function getShip(scene, x, y, shipName) {
         .addWeapon("auto cannon")
         .build();
 
-    case "kla'ed-battlecruiser":
+    case "Kla'ed Battlecruiser":
       return new ShipBuilder(
         scene,
         x,
@@ -26,7 +26,7 @@ export default function getShip(scene, x, y, shipName) {
         true
       )
         .addDestruction("Kla'ed", "Battlecruiser", 13)
-        .addHealth(10)
+        .addHealth(100)
         .addSpeed(100)
         .build();
   }
@@ -141,14 +141,12 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   flashColor(scene, color, delay) {
     this.setTintFill(color);
-
     if (this.weapon != null) {
       this.weapon.setTintFill(color);
     }
 
     scene.time.delayedCall(delay, () => {
       this.clearTint();
-
       if (this.weapon != null) {
         this.weapon.clearTint();
       }

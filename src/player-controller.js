@@ -2,7 +2,7 @@ import getShip from "./ships";
 
 export default class PlayerController {
   constructor(scene, x, y) {
-    this.player = getShip(scene, x, y, "player");
+    this.player = getShip(scene, x, y, "Player");
   }
 
   moveShip(cursors) {

@@ -44,7 +44,7 @@ export default class World1 extends Phaser.Scene {
       this,
       this.scale.width * 0.5,
       +50,
-      "kla'ed-battlecruiser"
+      "Kla'ed Battlecruiser"
     ).setFlipY(true);
 
     this.physics.add.overlap(
