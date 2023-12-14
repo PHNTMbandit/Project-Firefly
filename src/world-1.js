@@ -1,3 +1,4 @@
+import BackgroundController from "./background-controller";
 import getShip from "./ships";
 import PlayerController from "./player-controller";
 
@@ -7,6 +8,12 @@ export default class World1 extends Phaser.Scene {
   }
 
   preload() {
+    this.load.multiatlas(
+      "Backgrounds",
+      "public/sprites/backgrounds.json",
+      "public/sprites"
+    );
+
     this.load.multiatlas(
       "Kla'ed",
       "public/sprites/kla'ed.json",
@@ -34,6 +41,9 @@ export default class World1 extends Phaser.Scene {
 
   create() {
     this.addInput();
+
+    this.backgroundController = new BackgroundController(this);
+
     this.playerController = new PlayerController(
       this,
       this.scale.width * 0.5,
@@ -57,6 +67,7 @@ export default class World1 extends Phaser.Scene {
   }
 
   update(time) {
+    this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);
   }

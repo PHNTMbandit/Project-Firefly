@@ -4,6 +4,7 @@ import World1 from "./world-1";
 const config = {
   type: Phaser.AUTO,
   pixelArt: true,
+  backgroundColor: "#2e222f",
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
