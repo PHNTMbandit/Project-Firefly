@@ -2,11 +2,11 @@ import getShip from "./ships";
 
 export default class PlayerController {
   constructor(scene, x, y) {
-    this.player = getShip(scene, x, y, "player");
+    this.player = getShip(scene, x, y, "Player");
   }
 
   moveShip(cursors) {
-    this.player.physics.body.velocity.scale(0.95);
+    this.player.ship.body.velocity.scale(0.95);
 
     if (cursors.left.isDown) {
       this.player.moveX(-this.player.speed);
@@ -22,6 +22,6 @@ export default class PlayerController {
   }
 
   shoot(keySpace, time) {
-    this.player.shoot(keySpace, time);
+    this.player.useWeapon(keySpace, time);
   }
 }

@@ -1,16 +1,39 @@
 export default function getProjectile(scene, name) {
   switch (name) {
     case "bullet":
-      return new BulletGroup(scene);
+      return new ProjectileGroup(scene, Bullet, 100);
 
     case "energy ball":
-      return new EnergyBallGroup(scene);
+      return new ProjectileGroup(scene, EnergyBall, 100);
 
     case "laser beam":
-      return new LaserBeamGroup(scene);
+      return new ProjectileGroup(scene, LaserBeam, 100);
 
     case "rocket":
-      return new RocketGroup(scene);
+      return new ProjectileGroup(scene, Rocket, 100);
+  }
+}
+
+class ProjectileGroup extends Phaser.Physics.Arcade.Group {
+  constructor(scene, projectile, amount) {
+    super(scene.physics.world, scene);
+
+    this.createMultiple({
+      classType: projectile,
+      key: "projectiles",
+      frameQuantity: amount,
+      active: false,
+      visible: false,
+    });
+  }
+
+  getProjectile() {
+    return this.getFirstDead(false);
+  }
+
+  dealDamage(target, projectile) {
+    target.first.takeDamage(projectile.damage);
+    projectile.disableBody(true, true);
   }
 }
 
@@ -34,7 +57,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
         end: 3,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
       showOnStart: true,
     });
@@ -55,30 +78,6 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.anims.play("shoot");
     this.enableBody(true, x, y, true, true);
     this.setVelocityY(-this.speed);
-  }
-}
-
-class BulletGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene) {
-    super(scene.physics.world, scene);
-
-    this.createMultiple({
-      classType: Bullet,
-      key: "projectiles",
-      frame: "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0",
-      frameQuantity: 100,
-      active: false,
-      visible: false,
-    });
-  }
-
-  getProjectile() {
-    return this.getFirstDead(false);
-  }
-
-  dealDamage(target, projectile) {
-    target.ship.takeDamage(projectile.damage);
-    projectile.disableBody(true, true);
   }
 }
 
@@ -102,7 +101,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
         end: 9,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
       showOnStart: true,
     });
@@ -126,30 +125,6 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
   }
 }
 
-class EnergyBallGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene) {
-    super(scene.physics.world, scene);
-
-    this.createMultiple({
-      classType: EnergyBall,
-      key: "projectiles",
-      frame: "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0",
-      frameQuantity: 100,
-      active: false,
-      visible: false,
-    });
-  }
-
-  getProjectile() {
-    return this.getFirstDead(false);
-  }
-
-  dealDamage(target, projectile) {
-    target.ship.takeDamage(projectile.damage * projectile.scale);
-    projectile.disableBody(true, true);
-  }
-}
-
 class LaserBeam extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(
@@ -169,39 +144,13 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
         end: 7,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
     });
   }
 
   shoot(x, y) {
     this.anims.play("shoot", true);
     this.enableBody(true, x, y, true, true);
-  }
-}
-
-class LaserBeamGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene) {
-    super(scene.physics.world, scene);
-
-    this.createMultiple({
-      classType: LaserBeam,
-      key: "projectiles",
-      frame: "Laser Beam/Main ship weapon - Projectile - Zapper-0",
-      frameQuantity: 6,
-      active: false,
-      visible: false,
-      "setScale.y": 1,
-      //  "setOrigin.y": 0.95,
-    });
-  }
-
-  getProjectile(index) {
-    return this.children.getArray().at(index);
-  }
-
-  dealDamage(target, projectile) {
-    target.ship.takeDamage(projectile.damage);
-    projectile.disableBody(true, true);
   }
 }
 
@@ -225,7 +174,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         end: 2,
         zeroPad: 1,
       }),
-      frameRate: 10,
+      frameRate: 15,
     });
 
     scene.physics.add.existing(this);
@@ -244,29 +193,5 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     this.anims.play("shoot", true);
     this.enableBody(true, x, y, true, true);
     this.setVelocityY(-this.speed);
-  }
-}
-
-class RocketGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene) {
-    super(scene.physics.world, scene);
-
-    this.createMultiple({
-      classType: Rocket,
-      key: "projectiles",
-      frame: "Rocket/Main ship weapon - Projectile - Rocket-0",
-      frameQuantity: 100,
-      active: false,
-      visible: false,
-    });
-  }
-
-  getProjectile() {
-    return this.getFirstDead(false);
-  }
-
-  dealDamage(target, projectile) {
-    target.ship.takeDamage(projectile.damage);
-    projectile.disableBody(true, true);
   }
 }
