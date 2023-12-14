@@ -8,6 +8,12 @@ export default class World1 extends Phaser.Scene {
 
   preload() {
     this.load.multiatlas(
+      "kla'ed",
+      "public/sprites/kla'ed.json",
+      "public/sprites"
+    );
+
+    this.load.multiatlas(
       "player-ship",
       "public/sprites/player-ship.json",
       "public/sprites"
@@ -34,10 +40,15 @@ export default class World1 extends Phaser.Scene {
       this.scale.height - 32
     );
 
-    this.enemy = getShip(this, this.scale.width * 0.5, +50, "player");
+    this.enemy = getShip(
+      this,
+      this.scale.width * 0.5,
+      +50,
+      "kla'ed-battlecruiser"
+    ).setFlipY(true);
 
     this.physics.add.overlap(
-      this.enemy.physics,
+      this.enemy.ship,
       this.playerController.player.weapon.projectileGroup,
       this.playerController.player.weapon.projectileGroup.dealDamage,
       null,

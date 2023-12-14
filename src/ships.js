@@ -15,11 +15,32 @@ export default function getShip(scene, x, y, shipName) {
         .addSpeed(100)
         .addWeapon("auto cannon")
         .build();
+
+    case "kla'ed-battlecruiser":
+      return new ShipBuilder(
+        scene,
+        x,
+        y,
+        "kla'ed",
+        "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
+        true
+      )
+        .addHealth(100)
+        .addSpeed(100)
+        .build();
   }
 }
 
 class ShipBuilder {
-  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+  constructor(
+    scene,
+    x,
+    y,
+    spriteSheet,
+    spriteName,
+
+    collidesWithWorld
+  ) {
     this.ship = new Ship(
       scene,
       x,
@@ -54,11 +75,10 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
     super(scene, 0, 0, spriteSheet, spriteName);
 
-    this.container = scene.add.container(x, y, this);
-    this.container.setSize(32, 32);
-    this.physics = scene.physics.add.existing(this.container);
-    this.physics.body.setCollideWorldBounds(collidesWithWorld);
-    this.physics.ship = this;
+    this.ship = scene.add.container(x, y, this);
+    this.ship.setSize(this.frame.width, this.frame.height);
+    scene.physics.world.enable(this.ship);
+    this.ship.body.setCollideWorldBounds(collidesWithWorld);
   }
 
   addHealth(health) {
@@ -71,20 +91,19 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   addWeapon(weaponName) {
     this.weapon = getWeapon(this.scene, weaponName, this);
-    this.container.add(this.weapon);
-    this.physics.add(this.weapon);
-    this.container.sendToBack(this.weapon);
+    this.ship.add(this.weapon);
+    this.ship.sendToBack(this.weapon);
   }
 
   moveX(x) {
-    this.physics.body.velocity.x = x;
+    this.ship.body.velocity.x = x;
   }
 
   moveY(y) {
-    this.physics.body.velocity.y = y;
+    this.ship.body.velocity.y = y;
   }
 
-  shoot(keySpace, time) {
+  useWeapon(keySpace, time) {
     if (this.weapon != null) {
       this.weapon.use(keySpace, time);
     }
@@ -92,22 +111,26 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   takeDamage(amount) {
     this.health -= amount;
-
-    console.log(amount);
     this.flashColor(this.scene, 0xffffff, 15 * amount);
 
     if (this.health <= 0) {
-      this.container.destroy();
+      this.ship.destroy();
     }
   }
 
   flashColor(scene, color, delay) {
     this.setTintFill(color);
-    this.weapon.setTintFill(color);
+
+    if (this.weapon != null) {
+      this.weapon.setTintFill(color);
+    }
 
     scene.time.delayedCall(delay, () => {
       this.clearTint();
-      this.weapon.clearTint();
+
+      if (this.weapon != null) {
+        this.weapon.clearTint();
+      }
     });
   }
 }
