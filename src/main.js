@@ -4,12 +4,13 @@ import World1 from "./world-1";
 const config = {
   type: Phaser.AUTO,
   pixelArt: true,
+  backgroundColor: "#2e222f",
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     parent: "game",
-    width: 480,
-    height: 320,
+    width: 640,
+    height: 360,
   },
   physics: {
     default: "arcade",

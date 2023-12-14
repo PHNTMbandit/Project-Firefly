@@ -63,7 +63,7 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(10, 10, true);
+    this.body.setSize(this.frame.width, this.frame.height, true);
   }
 
   preUpdate(time, delta) {
@@ -107,7 +107,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(10, 10, true);
+    this.body.setSize(this.frame.width, this.frame.height, true);
   }
 
   preUpdate(time, delta) {
@@ -178,7 +178,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(10, 10, true);
+    this.body.setSize(this.frame.width, this.frame.height, true);
   }
 
   preUpdate(time, delta) {
