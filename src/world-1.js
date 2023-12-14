@@ -21,6 +21,12 @@ export default class World1 extends Phaser.Scene {
     );
 
     this.load.multiatlas(
+      "Planet",
+      "public/sprites/planet.json",
+      "public/sprites"
+    );
+
+    this.load.multiatlas(
       "player-ship",
       "public/sprites/player-ship.json",
       "public/sprites"
@@ -41,7 +47,6 @@ export default class World1 extends Phaser.Scene {
 
   create() {
     this.addInput();
-
     this.backgroundController = new BackgroundController(this);
 
     this.playerController = new PlayerController(
