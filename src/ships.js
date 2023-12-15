@@ -29,10 +29,12 @@ export default function getShip(scene, x, y, shipName) {
         y,
         "player-ship",
         "Main Ship - Base - Full health.png",
+        "Main Ship",
+        shipData(shipName),
         true
       )
-        .addHealth(shipData(shipName).health)
-        .addSpeed(shipData(shipName).speed)
+        .addHealth()
+        .addSpeed()
         .addWeapon("Auto Cannon")
         .build();
 
@@ -43,11 +45,14 @@ export default function getShip(scene, x, y, shipName) {
         y,
         "Kla'ed",
         "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
+        "Battlecruiser",
+        shipData(shipName),
         true
       )
-        .addDestruction("Kla'ed", "Battlecruiser", 13)
-        .addHealth(shipData(shipName).health)
-        .addSpeed(shipData(shipName).speed)
+        .addDestruction(13)
+        .addHealth()
+        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"), 29)
+        .addSpeed()
         .build();
 
     case "Vaxtra Scout":
@@ -57,55 +62,58 @@ export default function getShip(scene, x, y, shipName) {
         y,
         "Kla'ed",
         "Scout/Weapon/Kla'ed - Scout - Weapons-0",
+        "Scout",
+        shipData(shipName),
         true
       )
-        .addDestruction("Kla'ed", "Scout", 13)
-        .addHealth(shipData(shipName).health)
-        .addProjectileGroup(
-          getProjectileGroup(scene, "Vaxtra Bullet"),
-          "Kla'ed",
-          "Scout",
-          5
-        )
-        .addSpeed(shipData(shipName).speed)
+        .addDestruction(13)
+        .addHealth()
+        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"), 5)
+        .addSpeed()
         .build();
   }
 }
 
 class ShipBuilder {
-  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+  constructor(
+    scene,
+    x,
+    y,
+    spriteSheet,
+    spriteName,
+    shipName,
+    shipData,
+    collidesWithWorld
+  ) {
     this.ship = new Ship(
       scene,
       x,
       y,
       spriteSheet,
       spriteName,
+      shipName,
+      shipData,
       collidesWithWorld
     );
   }
 
-  addDestruction(spriteSheet, shipName, frames) {
-    this.ship.addDestructability(spriteSheet, shipName, frames);
+  addDestruction(frames) {
+    this.ship.addDestructability(frames);
     return this;
   }
 
-  addHealth(health) {
-    this.ship.addHealth(health);
+  addHealth() {
+    this.ship.addHealth();
     return this;
   }
 
-  addProjectileGroup(projectileGroup, spriteSheet, shipName, frames) {
-    this.ship.addProjectileGroup(
-      projectileGroup,
-      spriteSheet,
-      shipName,
-      frames
-    );
+  addProjectileGroup(projectileGroup, frames) {
+    this.ship.addProjectileGroup(projectileGroup, frames);
     return this;
   }
 
-  addSpeed(speed) {
-    this.ship.addSpeed(speed);
+  addSpeed() {
+    this.ship.addSpeed();
     return this;
   }
 
@@ -120,7 +128,16 @@ class ShipBuilder {
 }
 
 class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, spriteSheet, spriteName, collidesWithWorld) {
+  constructor(
+    scene,
+    x,
+    y,
+    spriteSheet,
+    spriteName,
+    shipName,
+    shipData,
+    collidesWithWorld
+  ) {
     super(scene, 0, 0, spriteSheet, spriteName);
 
     this.scene.add.existing(this);
@@ -128,14 +145,18 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.ship.setSize(this.frame.width, this.frame.height);
     this.scene.physics.world.enable(this.ship);
     this.ship.body.setCollideWorldBounds(collidesWithWorld);
+
     this.fireElapsedTime = 0;
+    this.spriteSheet = spriteSheet;
+    this.shipName = shipName;
+    this.shipData = shipData;
   }
 
-  addDestructability(spriteSheet, shipName, frames) {
+  addDestructability(frames) {
     this.anims.create({
       key: "destruction",
-      frames: this.anims.generateFrameNames(spriteSheet, {
-        prefix: `${shipName}/Destruction/${spriteSheet} - ${shipName} - Destruction-`,
+      frames: this.anims.generateFrameNames(this.spriteSheet, {
+        prefix: `${this.shipName}/Destruction/${this.spriteSheet} - ${this.shipName} - Destruction-`,
         start: 4,
         end: frames,
         zeroPad: 1,
@@ -155,18 +176,18 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     );
   }
 
-  addHealth(health) {
-    this.health = health;
+  addHealth() {
+    this.health = this.shipData.health;
   }
 
-  addProjectileGroup(projectileGroup, spriteSheet, shipName, frames) {
+  addProjectileGroup(projectileGroup, frames) {
     this.projectileGroup = projectileGroup;
     this.frameRate = 6000;
 
     this.anims.create({
       key: "shoot",
-      frames: this.anims.generateFrameNames(spriteSheet, {
-        prefix: `${shipName}/Weapon/${spriteSheet} - ${shipName} - Weapons-`,
+      frames: this.anims.generateFrameNames(this.spriteSheet, {
+        prefix: `${this.shipName}/Weapon/${this.spriteSheet} - ${this.shipName} - Weapons-`,
         end: frames,
         zeroPad: 1,
       }),
@@ -174,8 +195,8 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
-  addSpeed(speed) {
-    this.speed = speed;
+  addSpeed() {
+    this.speed = this.shipData.speed;
   }
 
   addWeapon(weaponName) {
@@ -211,8 +232,10 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
       this.fireElapsedTime =
         time + this.projectileGroup.projectileData.fireRate;
 
-      this.anims.play("shoot");
-      this.projectileGroup.shootProjectile(x, y, "down");
+      if (this.anims.exists("shoot")) {
+        this.anims.play("shoot", true);
+        this.projectileGroup.shootProjectile(x, y, "down");
+      }
     }
   }
 
@@ -221,8 +244,9 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.flashColor(this.scene, 0xffffff, 15 * amount);
 
     if (this.health <= 0) {
+      this.anims.remove("shoot");
       this.ship.body.checkCollision.none = true;
-      this.anims.play("destruction", true);
+      this.anims.play("destruction");
     }
   }
 

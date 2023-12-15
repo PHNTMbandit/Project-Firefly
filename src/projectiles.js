@@ -19,7 +19,7 @@ var projectileData = function getProjectileData(name) {
     },
     VaxtraBullet: {
       damage: 5,
-      fireRate: 700,
+      fireRate: 70,
       speed: 500,
     },
   };
@@ -109,7 +109,7 @@ class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.width, this.frame.height, true);
+    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
   }
 
   preUpdate(time, delta) {
