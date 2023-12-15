@@ -1,8 +1,8 @@
-import getShip from "./ships";
+import { getShip } from "./ships";
 
 export default class PlayerController {
   constructor(scene, x, y) {
-    this.player = getShip(scene, x, y, "Player");
+    this.player = getShip("Player").spawnShip(scene, x, y);
   }
 
   moveShip(cursors) {

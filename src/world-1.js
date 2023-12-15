@@ -1,6 +1,6 @@
 import BackgroundController from "./background-controller";
-import getShip from "./ships";
 import PlayerController from "./player-controller";
+import { getShip } from "./ships";
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -55,17 +55,22 @@ export default class World1 extends Phaser.Scene {
       this.scale.height - 32
     );
 
-    this.enemy = getShip(
-      this,
-      this.scale.width * 0.5,
-      50,
-      "Vaxtra Battlecruiser"
-    ).setFlipY(true);
+    this.enemy = getShip("Vaxtra Scout")
+      .spawnShip(this, this.scale.width * 0.5, 50)
+      .setFlipY(true);
 
     this.physics.add.overlap(
       this.enemy.ship,
       this.playerController.player.weapon.projectileGroup,
       this.playerController.player.weapon.projectileGroup.dealDamage,
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.playerController.player.ship,
+      this.enemy.projectileGroup,
+      this.enemy.projectileGroup.dealDamage,
       null,
       this
     );

@@ -1,78 +1,75 @@
-import getWeapon from "./weapons";
-import getProjectileGroup from "./projectiles";
+import { getWeapon } from "./weapons";
+import { getProjectile } from "./projectiles";
+import ProjectileGroup from "./projectiles";
 
-var shipData = function getProjectileData(name) {
-  const shipData = {
+export var getShip = function (name) {
+  const ships = {
     Player: {
       health: 100,
       speed: 100,
+      weapon: "Auto Cannon",
+      spawnShip: function (scene, x, y) {
+        return new ShipBuilder(
+          scene,
+          x,
+          y,
+          "player-ship",
+          "Main Ship - Base - Full health.png",
+          "Main Ship",
+          true
+        )
+          .addHealth(this.health)
+          .addSpeed(this.speed)
+          .addWeapon(this.weapon)
+          .build();
+      },
     },
     "Vaxtra Battlecruiser": {
       health: 100,
       speed: 100,
+      projectile: "Vaxtra Bullet",
+      spawnShip: function (scene, x, y) {
+        return new ShipBuilder(
+          scene,
+          x,
+          y,
+          "Kla'ed",
+          "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
+          "Battlecruiser",
+          true
+        )
+          .addDestruction(13)
+          .addHealth(this.health)
+          .addProjectile(getProjectile(this.projectile), 29)
+          .addSpeed(this.speed)
+          .build();
+      },
     },
     "Vaxtra Scout": {
       health: 100,
       speed: 100,
+      projectile: "Vaxtra Bullet",
+      spawnShip: function (scene, x, y) {
+        return new ShipBuilder(
+          scene,
+          x,
+          y,
+          "Kla'ed",
+          "Scout/Weapon/Kla'ed - Scout - Weapons-0",
+          "Scout",
+          true
+        )
+          .addDestruction(8)
+          .addHealth(this.health)
+          .addProjectile(getProjectile(this.projectile), 5)
+          .addSpeed(this.speed)
+          .build();
+      },
     },
   };
 
-  return shipData[name];
+  return ships[name];
 };
-
-export default function getShip(scene, x, y, shipName) {
-  switch (shipName) {
-    case "Player":
-      return new ShipBuilder(
-        scene,
-        x,
-        y,
-        "player-ship",
-        "Main Ship - Base - Full health.png",
-        "Main Ship",
-        shipData(shipName),
-        true
-      )
-        .addHealth()
-        .addSpeed()
-        .addWeapon("Auto Cannon")
-        .build();
-
-    case "Vaxtra Battlecruiser":
-      return new ShipBuilder(
-        scene,
-        x,
-        y,
-        "Kla'ed",
-        "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
-        "Battlecruiser",
-        shipData(shipName),
-        true
-      )
-        .addDestruction(13)
-        .addHealth()
-        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"), 29)
-        .addSpeed()
-        .build();
-
-    case "Vaxtra Scout":
-      return new ShipBuilder(
-        scene,
-        x,
-        y,
-        "Kla'ed",
-        "Scout/Weapon/Kla'ed - Scout - Weapons-0",
-        "Scout",
-        shipData(shipName),
-        true
-      )
-        .addDestruction(13)
-        .addHealth()
-        .addProjectileGroup(getProjectileGroup(scene, "Vaxtra Bullet"), 5)
-        .addSpeed()
-        .build();
-  }
-}
 
 class ShipBuilder {
   constructor(
@@ -82,7 +79,6 @@ class ShipBuilder {
     spriteSheet,
     spriteName,
     shipName,
-    shipData,
     collidesWithWorld
   ) {
     this.ship = new Ship(
@@ -92,7 +88,6 @@ class ShipBuilder {
       spriteSheet,
       spriteName,
       shipName,
-      shipData,
       collidesWithWorld
     );
   }
@@ -102,18 +97,18 @@ class ShipBuilder {
     return this;
   }
 
-  addHealth() {
-    this.ship.addHealth();
+  addHealth(health) {
+    this.ship.addHealth(health);
     return this;
   }
 
-  addProjectileGroup(projectileGroup, frames) {
-    this.ship.addProjectileGroup(projectileGroup, frames);
+  addProjectile(projectile, shootingFrames) {
+    this.ship.addProjectileGroup(projectile, shootingFrames);
     return this;
   }
 
-  addSpeed() {
-    this.ship.addSpeed();
+  addSpeed(speed) {
+    this.ship.addSpeed(speed);
     return this;
   }
 
@@ -135,7 +130,6 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     spriteSheet,
     spriteName,
     shipName,
-    shipData,
     collidesWithWorld
   ) {
     super(scene, 0, 0, spriteSheet, spriteName);
@@ -149,7 +143,6 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.fireElapsedTime = 0;
     this.spriteSheet = spriteSheet;
     this.shipName = shipName;
-    this.shipData = shipData;
   }
 
   addDestructability(frames) {
@@ -176,31 +169,30 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     );
   }
 
-  addHealth() {
-    this.health = this.shipData.health;
+  addHealth(health) {
+    this.health = health;
   }
 
-  addProjectileGroup(projectileGroup, frames) {
-    this.projectileGroup = projectileGroup;
-    this.frameRate = 6000;
+  addProjectileGroup(projectile, shootingFrames) {
+    this.projectileGroup = new ProjectileGroup(this.scene, projectile, 100);
 
     this.anims.create({
       key: "shoot",
       frames: this.anims.generateFrameNames(this.spriteSheet, {
         prefix: `${this.shipName}/Weapon/${this.spriteSheet} - ${this.shipName} - Weapons-`,
-        end: frames,
+        end: shootingFrames,
         zeroPad: 1,
       }),
-      frameRate: this.frameRate / this.projectileGroup.projectileData.fireRate,
+      frameRate: 6000 / projectile.fireRate,
     });
   }
 
-  addSpeed() {
-    this.speed = this.shipData.speed;
+  addSpeed(speed) {
+    this.speed = speed;
   }
 
   addWeapon(weaponName) {
-    this.weapon = getWeapon(this.scene, weaponName, this);
+    this.weapon = getWeapon(weaponName).spawnWeapon(this.scene, this);
     this.ship.add(this.weapon);
     this.ship.sendToBack(this.weapon);
   }
@@ -229,8 +221,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
   shoot(time, x, y) {
     if (time > this.fireElapsedTime) {
-      this.fireElapsedTime =
-        time + this.projectileGroup.projectileData.fireRate;
+      this.fireElapsedTime = time + this.projectileGroup.projectile.fireRate;
 
       if (this.anims.exists("shoot")) {
         this.anims.play("shoot", true);

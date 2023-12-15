@@ -1,65 +1,55 @@
-var projectileData = function getProjectileData(name) {
-  const projectileData = {
-    AutoCannonBullet: {
+export var getProjectile = function (name) {
+  const projectiles = {
+    "Auto Cannon Bullet": {
+      class: AutoCannonBullet,
       damage: 5,
       fireRate: 200,
       speed: 350,
+      spriteSheet: "projectiles",
     },
-    EnergyBall: {
+    "Energy Ball": {
+      class: EnergyBall,
       damage: 10,
       speed: 350,
+      spriteSheet: "projectiles",
     },
-    LaserBeam: {
+    "Laser Beam": {
+      class: LaserBeam,
       damage: 10,
+      spriteSheet: "projectiles",
     },
     Rocket: {
+      class: Rocket,
       damage: 5,
       fireRate: 600,
       speed: 350,
+      spriteSheet: "projectiles",
     },
-    VaxtraBullet: {
+    "Vaxtra Bullet": {
+      class: VaxtraBullet,
       damage: 5,
-      fireRate: 70,
+      fireRate: 700,
       speed: 500,
+      spriteSheet: "Kla'ed",
     },
   };
 
-  return projectileData[name];
+  return projectiles[name];
 };
 
-export default function getProjectileGroup(scene, name) {
-  switch (name) {
-    case "Auto Cannon Bullet":
-      return new ProjectileGroup(scene, AutoCannonBullet, "projectiles", 100);
-
-    case "Energy Ball":
-      return new ProjectileGroup(scene, EnergyBall, "projectiles", 100);
-
-    case "Laser Beam":
-      return new ProjectileGroup(scene, LaserBeam, "projectiles", 100);
-
-    case "Rocket":
-      return new ProjectileGroup(scene, Rocket, "projectiles", 100);
-
-    case "Vaxtra Bullet":
-      return new ProjectileGroup(scene, VaxtraBullet, "Kla'ed", 100);
-  }
-}
-
-class ProjectileGroup extends Phaser.Physics.Arcade.Group {
-  constructor(scene, projectile, spriteSheet, amount) {
+export default class ProjectileGroup extends Phaser.Physics.Arcade.Group {
+  constructor(scene, projectile, amount) {
     super(scene.physics.world, scene);
 
     this.createMultiple({
-      classType: projectile,
-      key: spriteSheet,
+      classType: projectile.class,
+      key: projectile.spriteSheet,
       frameQuantity: amount,
       active: false,
       visible: false,
     });
 
     this.projectile = projectile;
-    this.projectileData = projectileData(projectile.name);
   }
 
   getProjectile(index) {
@@ -77,16 +67,21 @@ class ProjectileGroup extends Phaser.Physics.Arcade.Group {
     projectile.enableBody(true, x, y, true, true);
 
     if (direction == "up") {
-      projectile.setVelocityY(-this.projectileData.speed);
+      projectile.setVelocityY(-this.projectile.speed);
     } else if (direction == "down") {
       projectile.setFlipY(true);
-      projectile.setVelocityY(this.projectileData.speed);
+      projectile.setVelocityY(this.projectile.speed);
     }
   }
 
   dealDamage(target, projectile) {
-    target.first.takeDamage(
-      projectileData(projectile.constructor.name).damage * projectile.scale
+    const projectileName = projectile.constructor.name.replace(
+      /([a-z])([A-Z])/g,
+      "$1 $2"
+    );
+
+    target.last.takeDamage(
+      getProjectile(projectileName).damage * projectile.scale
     );
     projectile.disableBody(true, true);
   }
@@ -110,6 +105,7 @@ class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
 
     scene.physics.add.existing(this);
     this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
+    console.log(this.width);
   }
 
   preUpdate(time, delta) {
@@ -138,7 +134,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.width, this.frame.height, true);
+    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
   }
 
   preUpdate(time, delta) {
@@ -183,7 +179,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.width, this.frame.height, true);
+    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
   }
 
   preUpdate(time, delta) {
@@ -212,11 +208,8 @@ class VaxtraBullet extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.setCollideWorldBounds(true);
-    this.body.setSize(this.frame.width, this.frame.height, true);
-    this.body.world.on("worldbounds", () => {
-      console.log("hi");
-    });
+    console.log(this.width);
+    this.body.setSize(this.frame.realWidth, this.frame.realHeight);
   }
 
   preUpdate(time, delta) {

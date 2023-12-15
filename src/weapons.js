@@ -1,23 +1,39 @@
-import getProjectileGroup from "./projectiles";
+import { getProjectile } from "./projectiles";
+import ProjectileGroup from "./projectiles";
 
-export default function getWeapon(scene, name, ship) {
-  switch (name) {
-    case "Auto Cannon":
-      return new AutoCannon(scene, ship);
+export var getWeapon = function (name) {
+  const weapons = {
+    "Auto Cannon": {
+      projectile: "Auto Cannon Bullet",
+      spawnWeapon: function (scene, ship) {
+        return new AutoCannon(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    "Big Space Gun": {
+      projectile: "Energy Ball",
+      spawnWeapon: function (scene, ship) {
+        return new BigSpaceGun(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    Rockets: {
+      projectile: "Rocket",
+      spawnWeapon: function (scene, ship) {
+        return new Rockets(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    Zapper: {
+      projectile: "Laser Beam",
+      spawnWeapon: function (scene, ship) {
+        return new Zapper(scene, ship, getProjectile(this.projectile));
+      },
+    },
+  };
 
-    case "Big Space Gun":
-      return new BigSpaceGun(scene, ship);
-
-    case "Rockets":
-      return new Rockets(scene, ship);
-
-    case "Zapper":
-      return new Zapper(scene, ship);
-  }
-}
+  return weapons[name];
+};
 
 class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -27,9 +43,8 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.projectileGroup = getProjectileGroup(scene, "Auto Cannon Bullet");
-    this.fireRate = this.projectileGroup.projectileData.fireRate;
-    this.frameRate = 6000;
+    this.fireRate = projectile.fireRate;
+    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
     this.fireElapsedTime = 0;
 
     this.anims.create({
@@ -39,7 +54,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
         end: 6,
         zeroPad: 1,
       }),
-      frameRate: this.frameRate / this.fireRate,
+      frameRate: 6000 / this.fireRate,
     });
 
     this.anims.create({
@@ -88,7 +103,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
 }
 
 class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -102,7 +117,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
     this.projectileScaleFactor = this.minProjectScaleFactor;
     this.maxProjectileScaleFactor = 2;
     this.projectileScaleRate = 0.01;
-    this.projectileGroup = getProjectileGroup(scene, "Energy Ball");
+    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "charging",
@@ -148,7 +163,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Rockets extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -158,10 +173,9 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.projectileGroup = getProjectileGroup(scene, "Rocket");
-    this.fireRate = this.projectileGroup.projectileData.fireRate;
-    this.frameRate = 6000;
+    this.fireRate = projectile.fireRate;
     this.fireElapsedTime = 0;
+    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "use",
@@ -172,7 +186,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
       }),
       showOnStart: true,
       hideOnComplete: true,
-      frameRate: this.frameRate / this.fireRate,
+      frameRate: 6000 / this.fireRate,
     });
 
     this.on(
@@ -245,7 +259,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Zapper extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -255,7 +269,7 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.projectileGroup = getProjectileGroup(scene, "laser beam");
+    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
     this.laserBeam1 = this.projectileGroup.getProjectile(1);
     this.laserBeam2 = this.projectileGroup.getProjectile(2);
 
