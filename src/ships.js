@@ -8,7 +8,7 @@ export var getShip = function (name) {
       health: 100,
       speed: 100,
       weapon: "Auto Cannon",
-      spawnShip: function (scene, x, y) {
+      spawnShip(scene, x, y) {
         return new ShipBuilder(
           scene,
           x,
@@ -28,7 +28,7 @@ export var getShip = function (name) {
       health: 100,
       speed: 100,
       projectile: "Vaxtra Bullet",
-      spawnShip: function (scene, x, y) {
+      spawnShip(scene, x, y) {
         return new ShipBuilder(
           scene,
           x,
@@ -49,7 +49,7 @@ export var getShip = function (name) {
       health: 100,
       speed: 100,
       projectile: "Vaxtra Bullet",
-      spawnShip: function (scene, x, y) {
+      spawnShip(scene, x, y) {
         return new ShipBuilder(
           scene,
           x,
@@ -136,7 +136,7 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.add.existing(this);
     this.ship = scene.add.container(x, y, this);
-    this.ship.setSize(this.frame.width, this.frame.height);
+    this.ship.setSize(this.frame.cutWidth, this.frame.cutHeight);
     this.scene.physics.world.enable(this.ship);
     this.ship.body.setCollideWorldBounds(collidesWithWorld);
 

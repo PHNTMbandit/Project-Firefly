@@ -89,7 +89,13 @@ export default class ProjectileGroup extends Phaser.Physics.Arcade.Group {
 
 class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "projectiles");
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Bullet/Main ship weapon - Projectile - Auto cannon bullet-0"
+    );
 
     this.anims.create({
       key: "shoot",
@@ -104,8 +110,7 @@ class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
-    console.log(this.width);
+    this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
   }
 
   preUpdate(time, delta) {
@@ -119,7 +124,13 @@ class AutoCannonBullet extends Phaser.Physics.Arcade.Sprite {
 
 class EnergyBall extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "projectiles");
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Energy Ball/Main ship weapon - Projectile - Big Space Gun-0"
+    );
 
     this.anims.create({
       key: "shoot",
@@ -134,7 +145,7 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
+    this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
   }
 
   preUpdate(time, delta) {
@@ -148,7 +159,13 @@ class EnergyBall extends Phaser.Physics.Arcade.Sprite {
 
 class LaserBeam extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "projectiles");
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Laser Beam/Main ship weapon - Projectile - Zapper-0"
+    );
 
     this.anims.create({
       key: "shoot",
@@ -164,7 +181,13 @@ class LaserBeam extends Phaser.Physics.Arcade.Sprite {
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "projectiles");
+    super(
+      scene,
+      x,
+      y,
+      "projectiles",
+      "Rocket/Main ship weapon - Projectile - Rocket-0"
+    );
 
     this.anims.create({
       key: "shoot",
@@ -179,7 +202,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    this.body.setSize(this.frame.halfWidth, this.frame.halfHeight);
+    this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
   }
 
   preUpdate(time, delta) {
@@ -193,7 +216,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
 class VaxtraBullet extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "Kla'ed");
+    super(scene, x, y, "Kla'ed", "Projectiles/Bullet/Kla'ed - Bullet-0");
 
     this.anims.create({
       key: "shoot",
@@ -208,8 +231,7 @@ class VaxtraBullet extends Phaser.Physics.Arcade.Sprite {
     });
 
     scene.physics.add.existing(this);
-    console.log(this.width);
-    this.body.setSize(this.frame.realWidth, this.frame.realHeight);
+    this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
   }
 
   preUpdate(time, delta) {

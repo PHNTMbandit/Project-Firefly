@@ -5,25 +5,25 @@ export var getWeapon = function (name) {
   const weapons = {
     "Auto Cannon": {
       projectile: "Auto Cannon Bullet",
-      spawnWeapon: function (scene, ship) {
+      spawnWeapon(scene, ship) {
         return new AutoCannon(scene, ship, getProjectile(this.projectile));
       },
     },
     "Big Space Gun": {
       projectile: "Energy Ball",
-      spawnWeapon: function (scene, ship) {
+      spawnWeapon(scene, ship) {
         return new BigSpaceGun(scene, ship, getProjectile(this.projectile));
       },
     },
     Rockets: {
       projectile: "Rocket",
-      spawnWeapon: function (scene, ship) {
+      spawnWeapon(scene, ship) {
         return new Rockets(scene, ship, getProjectile(this.projectile));
       },
     },
     Zapper: {
       projectile: "Laser Beam",
-      spawnWeapon: function (scene, ship) {
+      spawnWeapon(scene, ship) {
         return new Zapper(scene, ship, getProjectile(this.projectile));
       },
     },
