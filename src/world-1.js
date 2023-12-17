@@ -55,7 +55,7 @@ export default class World1 extends Phaser.Scene {
       this.scale.height - 32
     );
 
-    this.enemy = getShip("Vaxtra Scout")
+    this.enemy = getShip("Vaxtra Battlecruiser")
       .spawnShip(this, this.scale.width * 0.5, 50)
       .setFlipY(true);
 

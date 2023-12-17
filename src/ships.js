@@ -27,7 +27,7 @@ export var getShip = function (name) {
     "Vaxtra Battlecruiser": {
       health: 100,
       speed: 100,
-      projectile: "Vaxtra Bullet",
+      projectile: "Vaxtra Big Bullet",
       spawnShip(scene, x, y) {
         return new ShipBuilder(
           scene,
