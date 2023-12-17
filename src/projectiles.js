@@ -106,11 +106,6 @@ export default class ProjectileGroup extends Phaser.Physics.Arcade.Group {
       projectile.setVelocityY(this.projectile.speed);
     }
   }
-
-  dealDamage(target, projectile) {
-    target.last.takeDamage(projectile.data.damage * projectile.scale);
-    projectile.disableBody(true, true);
-  }
 }
 
 class Projectile extends Phaser.Physics.Arcade.Sprite {

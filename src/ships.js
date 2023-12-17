@@ -5,153 +5,95 @@ import ProjectileGroup from "./projectiles";
 export var getShip = function (name) {
   const ships = {
     Player: {
+      shipType: PlayerShip,
       health: 100,
       speed: 100,
       weapon: "Auto Cannon",
-      spawnShip(scene, x, y) {
-        return new ShipBuilder(
-          scene,
-          x,
-          y,
-          "player-ship",
-          "Main Ship - Base - Full health.png",
-          "Main Ship",
-          true
-        )
-          .addHealth(this.health)
-          .addSpeed(this.speed)
-          .addWeapon(this.weapon)
-          .build();
+      spriteSheet: "player-ship",
+      sprite: "Main Ship - Base - Full health.png",
+      spawn(scene, x, y) {
+        return new PlayerShip(scene, x, y, this);
       },
     },
     "Vaxtra Battlecruiser": {
+      shipType: EnemyShip,
       health: 100,
       speed: 100,
       projectile: "Vaxtra Big Bullet",
-      spawnShip(scene, x, y) {
-        return new ShipBuilder(
-          scene,
-          x,
-          y,
-          "Kla'ed",
-          "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
-          "Battlecruiser",
-          true
-        )
-          .addDestruction(13)
-          .addHealth(this.health)
-          .addProjectile(getProjectile(this.projectile), 29)
-          .addSpeed(this.speed)
-          .build();
-      },
+      spriteSheet: "Kla'ed",
+      sprite: "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
+      destructionSprite:
+        "Battlecruiser/Destruction/Kla'ed - Battlecruiser - Destruction-0",
+      weaponFrames: 29,
+      destructionFrames: 13,
     },
     "Vaxtra Scout": {
+      shipType: EnemyShip,
       health: 100,
       speed: 100,
       projectile: "Vaxtra Bullet",
-      spawnShip(scene, x, y) {
-        return new ShipBuilder(
-          scene,
-          x,
-          y,
-          "Kla'ed",
-          "Scout/Weapon/Kla'ed - Scout - Weapons-0",
-          "Scout",
-          true
-        )
-          .addDestruction(8)
-          .addHealth(this.health)
-          .addProjectile(getProjectile(this.projectile), 5)
-          .addSpeed(this.speed)
-          .build();
-      },
+      spriteSheet: "Kla'ed",
+      sprite: "Scout/Weapon/Kla'ed - Scout - Weapons-0",
+      destructionSprite: "Scout/Destruction/Kla'ed - Scout - Destruction-0",
+      weaponFrames: 5,
+      destructionFrames: 8,
     },
   };
 
   return ships[name];
 };
 
-class ShipBuilder {
+export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
   constructor(
     scene,
-    x,
-    y,
-    spriteSheet,
-    spriteName,
-    shipName,
-    collidesWithWorld
-  ) {
-    this.ship = new Ship(
-      scene,
-      x,
-      y,
+    amount,
+    {
+      shipType,
+      health,
+      projectile,
       spriteSheet,
-      spriteName,
-      shipName,
-      collidesWithWorld
-    );
-  }
-
-  addDestruction(frames) {
-    this.ship.addDestructability(frames);
-    return this;
-  }
-
-  addHealth(health) {
-    this.ship.addHealth(health);
-    return this;
-  }
-
-  addProjectile(projectile, shootingFrames) {
-    this.ship.addProjectileGroup(projectile, shootingFrames);
-    return this;
-  }
-
-  addSpeed(speed) {
-    this.ship.addSpeed(speed);
-    return this;
-  }
-
-  addWeapon(weaponName) {
-    this.ship.addWeapon(weaponName);
-    return this;
-  }
-
-  build() {
-    return this.ship;
-  }
-}
-
-class Ship extends Phaser.Physics.Arcade.Sprite {
-  constructor(
-    scene,
-    x,
-    y,
-    spriteSheet,
-    spriteName,
-    shipName,
-    collidesWithWorld
+      sprite,
+      destructionSprite,
+      weaponFrames,
+      destructionFrames,
+    }
   ) {
-    super(scene, 0, 0, spriteSheet, spriteName);
+    super(scene.physics.world, scene);
 
-    this.scene.add.existing(this);
-    this.ship = scene.add.container(x, y, this);
-    this.ship.setSize(this.frame.cutWidth, this.frame.cutHeight);
-    this.scene.physics.world.enable(this.ship);
-    this.ship.body.setCollideWorldBounds(collidesWithWorld);
+    this.health = health;
+    this.sprite = sprite;
 
-    this.fireElapsedTime = 0;
-    this.spriteSheet = spriteSheet;
-    this.shipName = shipName;
-  }
+    this.createMultiple({
+      classType: shipType,
+      key: spriteSheet,
+      frame: sprite,
+      frameQuantity: amount,
+      active: false,
+      visible: false,
+    });
 
-  addDestructability(frames) {
-    this.anims.create({
-      key: "destruction",
-      frames: this.anims.generateFrameNames(this.spriteSheet, {
-        prefix: `${this.shipName}/Destruction/${this.spriteSheet} - ${this.shipName} - Destruction-`,
-        start: 4,
-        end: frames,
+    this.projectileGroup = new ProjectileGroup(
+      scene,
+      getProjectile(projectile),
+      100
+    );
+
+    scene.anims.create({
+      key: `${sprite} shoot`,
+      frames: scene.anims.generateFrameNames(spriteSheet, {
+        prefix: sprite.slice(0, -1),
+        end: weaponFrames,
+        zeroPad: 1,
+      }),
+      frameRate: 6000 / projectile.fireRate,
+    });
+
+    scene.anims.create({
+      key: `${sprite} shoot destruction`,
+      frames: scene.anims.generateFrameNames(spriteSheet, {
+        prefix: destructionSprite.slice(0, -1),
+        start: 0,
+        end: destructionFrames,
         zeroPad: 1,
       }),
       frameRate: 15,
@@ -162,53 +104,84 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
       (e) => {
         if (e.key == "destruction") {
           this.setActive(false);
-          this.ship.destroy();
         }
       },
       this
     );
   }
 
-  addHealth(health) {
-    this.health = health;
+  spawnShip(x, y) {
+    const ship = this.getFirstDead(false);
+    ship.enableBody(true, x, y, true, true);
+    ship.health = this.health;
+    ship.sprite = this.sprite;
   }
 
-  addProjectileGroup(projectile, shootingFrames) {
-    this.projectileGroup = new ProjectileGroup(this.scene, projectile, 100);
+  shoot(ship, time, x, y) {
+    if (time > ship.fireElapsedTime) {
+      ship.fireElapsedTime = time + this.projectileGroup.projectile.fireRate;
+      console.log(this.scene.anims);
+      this.scene.anims.play(`${ship.sprite} shoot`, ship);
+      this.projectileGroup.shootProjectile(x, y, "down");
+    }
+  }
 
-    this.anims.create({
-      key: "shoot",
-      frames: this.anims.generateFrameNames(this.spriteSheet, {
-        prefix: `${this.shipName}/Weapon/${this.spriteSheet} - ${this.shipName} - Weapons-`,
-        end: shootingFrames,
-        zeroPad: 1,
-      }),
-      frameRate: 6000 / projectile.fireRate,
+  takeDamage(projectile, target) {
+    if (projectile.data != null) {
+      const amount = projectile.data.damage * projectile.scale;
+      target.health -= amount;
+      target.flashColor(0xffffff, 15 * amount);
+      projectile.disableBody(true, true);
+
+      if (target.health <= 0) {
+        //  ship.anims.remove("shoot");
+        console.log(this.scene.anims);
+        this.scene.anims.play(`${target.sprite} destruction`, target);
+        target.ship.body.checkCollision.none = true;
+      }
+    }
+  }
+}
+
+class EnemyShip extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, spriteSheet, sprite) {
+    super(scene, x, y, spriteSheet, sprite);
+
+    this.scene.physics.world.enable(this);
+    this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
+    this.setFlipY(true);
+    this.fireElapsedTime = 0;
+  }
+
+  flashColor(color, delay) {
+    this.setTintFill(color);
+
+    this.scene.time.delayedCall(delay, () => {
+      this.clearTint();
     });
   }
+}
 
-  addSpeed(speed) {
-    this.speed = speed;
-  }
+class PlayerShip extends Phaser.Physics.Arcade.Sprite {
+  constructor(scene, x, y, { health, speed, spriteSheet, sprite, weapon }) {
+    super(scene, 0, 0, spriteSheet, sprite);
 
-  addWeapon(weaponName) {
-    this.weapon = getWeapon(weaponName).spawnWeapon(this.scene, this);
+    this.scene.add.existing(this);
+    this.ship = scene.add.container(x, y, this);
+    this.ship.setSize(this.frame.cutWidth, this.frame.cutHeight);
+    this.scene.physics.world.enable(this.ship);
+    this.ship.body.setCollideWorldBounds(true);
+
+    this.weapon = getWeapon(weapon).spawnWeapon(this.scene, this);
     this.ship.add(this.weapon);
     this.ship.sendToBack(this.weapon);
+    this.health = health;
+    this.speed = speed;
+    this.fireElapsedTime = 0;
   }
 
-  flashColor(scene, color, delay) {
-    this.setTintFill(color);
-    if (this.weapon != null) {
-      this.weapon.setTintFill(color);
-    }
-
-    scene.time.delayedCall(delay, () => {
-      this.clearTint();
-      if (this.weapon != null) {
-        this.weapon.clearTint();
-      }
-    });
+  useWeapon(keySpace, time) {
+    this.weapon.use(keySpace, time);
   }
 
   moveX(x) {
@@ -219,31 +192,21 @@ class Ship extends Phaser.Physics.Arcade.Sprite {
     this.ship.body.velocity.y = y;
   }
 
-  shoot(time, x, y) {
-    if (time > this.fireElapsedTime) {
-      this.fireElapsedTime = time + this.projectileGroup.projectile.fireRate;
-
-      if (this.anims.exists("shoot")) {
-        this.anims.play("shoot", true);
-        this.projectileGroup.shootProjectile(x, y, "down");
-      }
-    }
-  }
-
   takeDamage(amount) {
     this.health -= amount;
     this.flashColor(this.scene, 0xffffff, 15 * amount);
-
     if (this.health <= 0) {
-      this.anims.remove("shoot");
       this.ship.body.checkCollision.none = true;
-      this.anims.play("destruction");
     }
   }
 
-  useWeapon(keySpace, time) {
-    if (this.weapon != null) {
-      this.weapon.use(keySpace, time);
-    }
+  flashColor(scene, color, delay) {
+    this.setTintFill(color);
+    this.weapon.setTintFill(color);
+
+    scene.time.delayedCall(delay, () => {
+      this.clearTint();
+      this.weapon.clearTint();
+    });
   }
 }
