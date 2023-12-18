@@ -11,39 +11,27 @@ export default class World1 extends Phaser.Scene {
   preload() {
     this.load.multiatlas(
       "Backgrounds",
-      "public/sprites/backgrounds.json",
-      "public/sprites"
+      "/sprites/backgrounds.json",
+      "/sprites"
     );
 
-    this.load.multiatlas(
-      "Kla'ed",
-      "public/sprites/kla'ed.json",
-      "public/sprites"
-    );
+    this.load.multiatlas("Kla'ed", "/sprites/kla'ed.json", "/sprites");
 
-    this.load.multiatlas(
-      "Planet",
-      "public/sprites/planet.json",
-      "public/sprites"
-    );
+    this.load.multiatlas("Planet", "/sprites/planet.json", "/sprites");
 
     this.load.multiatlas(
       "player-ship",
-      "public/sprites/player-ship.json",
-      "public/sprites"
+      "/sprites/player-ship.json",
+      "/sprites"
     );
 
     this.load.multiatlas(
       "projectiles",
-      "public/sprites/projectiles.json",
-      "public/sprites"
+      "/sprites/projectiles.json",
+      "/sprites"
     );
 
-    this.load.multiatlas(
-      "weapons",
-      "public/sprites/weapons.json",
-      "public/sprites"
-    );
+    this.load.multiatlas("weapons", "/sprites/weapons.json", "/sprites");
   }
 
   create() {
@@ -57,12 +45,12 @@ export default class World1 extends Phaser.Scene {
     );
 
     this.enemies = new EnemyGroup(this, 10, getShip("Vaxtra Battlecruiser"));
-    this.enemies.spawnShip(this.scale.width * 0.5, 50);
+    this.enemy = this.enemies.spawnShip(this.scale.width * 0.5, 50);
 
     this.physics.add.overlap(
-      this.playerController.player.weapon.projectileGroup,
       this.enemies,
-      this.enemies.takeDamage,
+      this.playerController.player.weapon.projectileGroup,
+      this.playerController.player.weapon.projectileGroup.dealDamage,
       null,
       this
     );
@@ -70,13 +58,16 @@ export default class World1 extends Phaser.Scene {
     this.physics.add.overlap(
       this.playerController.player.ship,
       this.enemies.projectileGroup,
-      this.playerController.player.takeDamage,
+      this.enemies.projectileGroup.dealDamage,
       null,
       this
     );
   }
 
   update(time) {
+    if (this.enemy.active) {
+      this.enemies.shoot(this.enemy, time, this.enemy.x, this.enemy.y + 13);
+    }
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);

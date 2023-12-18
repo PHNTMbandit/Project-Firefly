@@ -86,17 +86,13 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
 
         this.anims.play("use");
 
-        this.projectileGroup.shootProjectile(
-          this.user.ship.x - 8,
-          this.user.ship.y - 20,
-          "up"
-        );
+        this.projectileGroup
+          .getProjectile()
+          .shootProjectile(this.user.ship.x - 8, this.user.ship.y - 20, "up");
 
-        this.projectileGroup.shootProjectile(
-          this.user.ship.x + 8,
-          this.user.ship.y - 20,
-          "up"
-        );
+        this.projectileGroup
+          .getProjectile()
+          .shootProjectile(this.user.ship.x + 8, this.user.ship.y - 20, "up");
       }
     }
   }
@@ -140,12 +136,14 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 
     scene.keySpace.on("up", () => {
       this.anims.play("shoot");
-      this.projectileGroup.shootProjectile(
-        this.user.ship.x,
-        this.user.ship.y - 20,
-        "up",
-        this.projectileScaleFactor
-      );
+      this.projectileGroup
+        .getProjectile()
+        .shootProjectile(
+          this.user.ship.x,
+          this.user.ship.y - 20,
+          "up",
+          this.projectileScaleFactor
+        );
       this.projectileScaleFactor = this.minProjectScaleFactor;
     });
 
@@ -194,51 +192,47 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
       function (anim, frame, gameObject) {
         switch (frame.index) {
           case 2:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x - 6,
-              this.user.ship.y - 10,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(
+                this.user.ship.x - 6,
+                this.user.ship.y - 10,
+                "up"
+              );
             break;
 
           case 4:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x + 6,
-              this.user.ship.y - 10,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(
+                this.user.ship.x + 6,
+                this.user.ship.y - 10,
+                "up"
+              );
             break;
 
           case 6:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x - 10,
-              this.user.ship.y,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(this.user.ship.x - 10, this.user.ship.y, "up");
             break;
 
           case 8:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x + 10,
-              this.user.ship.y,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(this.user.ship.x + 10, this.user.ship.y, "up");
             break;
 
           case 10:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x - 14,
-              this.user.ship.y,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(this.user.ship.x - 14, this.user.ship.y, "up");
             break;
 
           case 12:
-            this.projectileGroup.shootProjectile(
-              this.user.ship.x + 14,
-              this.user.ship.y,
-              "up"
-            );
+            this.projectileGroup
+              .getProjectile()
+              .shootProjectile(this.user.ship.x + 14, this.user.ship.y, "up");
             break;
         }
       }
