@@ -55,7 +55,7 @@ export default class BackgroundController {
     });
 
     this.bigStar2 = scene.add.sprite(
-      300,
+      330,
       175,
       "Backgrounds",
       "Big Star 2/Starry background - Layer X - Big Star 2-0"

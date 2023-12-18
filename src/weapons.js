@@ -1,23 +1,39 @@
-import getProjectile from "./projectiles";
+import { getProjectileGroup } from "./projectiles";
+import { getProjectile } from "./projectiles";
 
-export default function getWeapon(scene, name, ship) {
-  switch (name) {
-    case "auto cannon":
-      return new AutoCannon(scene, ship);
+export var getWeapon = function (name) {
+  const weapons = {
+    "Auto Cannon": {
+      projectile: "Auto Cannon Bullet",
+      spawnWeapon(scene, ship) {
+        return new AutoCannon(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    "Big Space Gun": {
+      projectile: "Energy Ball",
+      spawnWeapon(scene, ship) {
+        return new BigSpaceGun(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    Rockets: {
+      projectile: "Rocket",
+      spawnWeapon(scene, ship) {
+        return new Rockets(scene, ship, getProjectile(this.projectile));
+      },
+    },
+    Zapper: {
+      projectile: "Laser Beam",
+      spawnWeapon(scene, ship) {
+        return new Zapper(scene, ship, getProjectile(this.projectile));
+      },
+    },
+  };
 
-    case "big space gun":
-      return new BigSpaceGun(scene, ship);
-
-    case "rockets":
-      return new Rockets(scene, ship);
-
-    case "zapper":
-      return new Zapper(scene, ship);
-  }
-}
+  return weapons[name];
+};
 
 class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -27,10 +43,9 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.fireRate = 200;
-    this.frameRate = 6000;
+    this.fireRate = projectile.fireRate;
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
     this.fireElapsedTime = 0;
-    this.projectileGroup = getProjectile(scene, "bullet");
 
     this.anims.create({
       key: "use",
@@ -39,7 +54,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
         end: 6,
         zeroPad: 1,
       }),
-      frameRate: this.frameRate / this.fireRate,
+      frameRate: 6000 / this.fireRate,
     });
 
     this.anims.create({
@@ -68,21 +83,22 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     if (keySpace.isDown) {
       if (time > this.fireElapsedTime) {
         this.fireElapsedTime = time + this.fireRate;
-
         this.anims.play("use");
+
         this.projectileGroup
           .getProjectile()
-          .shoot(this.user.ship.x - 8, this.user.ship.y - 20);
+          .shootProjectile(this.user.ship.x - 8, this.user.ship.y - 20, "up");
+
         this.projectileGroup
           .getProjectile()
-          .shoot(this.user.ship.x + 8, this.user.ship.y - 20);
+          .shootProjectile(this.user.ship.x + 8, this.user.ship.y - 20, "up");
       }
     }
   }
 }
 
 class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -96,7 +112,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
     this.projectileScaleFactor = this.minProjectScaleFactor;
     this.maxProjectileScaleFactor = 2;
     this.projectileScaleRate = 0.01;
-    this.projectileGroup = getProjectile(scene, "energy ball");
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "charging",
@@ -119,12 +135,14 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 
     scene.keySpace.on("up", () => {
       this.anims.play("shoot");
-      const projectile = this.projectileGroup.getProjectile();
-      projectile.setScale(
-        this.projectileScaleFactor,
-        this.projectileScaleFactor
-      );
-      projectile.shoot(this.user.ship.x, this.user.ship.y - 20);
+      this.projectileGroup
+        .getProjectile()
+        .shootProjectile(
+          this.user.ship.x,
+          this.user.ship.y - 20,
+          "up",
+          this.projectileScaleFactor
+        );
       this.projectileScaleFactor = this.minProjectScaleFactor;
     });
 
@@ -142,7 +160,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Rockets extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -152,10 +170,9 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.fireRate = 600;
-    this.frameRate = 6000;
+    this.fireRate = projectile.fireRate;
     this.fireElapsedTime = 0;
-    this.projectileGroup = getProjectile(scene, "rocket");
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "use",
@@ -166,7 +183,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
       }),
       showOnStart: true,
       hideOnComplete: true,
-      frameRate: this.frameRate / this.fireRate,
+      frameRate: 6000 / this.fireRate,
     });
 
     this.on(
@@ -176,37 +193,45 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
           case 2:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x - 6, this.user.ship.y - 10);
+              .shootProjectile(
+                this.user.ship.x - 6,
+                this.user.ship.y - 10,
+                "up"
+              );
             break;
 
           case 4:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x + 6, this.user.ship.y - 10);
+              .shootProjectile(
+                this.user.ship.x + 6,
+                this.user.ship.y - 10,
+                "up"
+              );
             break;
 
           case 6:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x - 10, this.user.ship.y);
+              .shootProjectile(this.user.ship.x - 10, this.user.ship.y, "up");
             break;
 
           case 8:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x + 10, this.user.ship.y);
+              .shootProjectile(this.user.ship.x + 10, this.user.ship.y, "up");
             break;
 
           case 10:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x - 14, this.user.ship.y);
+              .shootProjectile(this.user.ship.x - 14, this.user.ship.y, "up");
             break;
 
           case 12:
             this.projectileGroup
               .getProjectile()
-              .shoot(this.user.ship.x + 14, this.user.ship.y);
+              .shootProjectile(this.user.ship.x + 14, this.user.ship.y, "up");
             break;
         }
       }
@@ -227,7 +252,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Zapper extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user) {
+  constructor(scene, user, projectile) {
     super(
       scene,
       user.x,
@@ -237,9 +262,9 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.projectileGroup = getProjectile(scene, "laser beam");
-    this.laserBeam1 = this.projectileGroup.getProjectile(1);
-    this.laserBeam2 = this.projectileGroup.getProjectile(2);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 2);
+    this.laserBeam1 = this.projectileGroup.getProjectile(0);
+    this.laserBeam2 = this.projectileGroup.getProjectile(1);
 
     this.anims.create({
       key: "use",
@@ -261,12 +286,12 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
 
   use(keySpace) {
     if (keySpace.isDown) {
-      this.anims.play("use");
-      this.laserBeam1.shoot(this.user.ship.x - 8, this.user.ship.y - 33);
-      this.laserBeam2.shoot(this.user.ship.x + 8, this.user.ship.y - 33);
+      this.anims.play("use", true);
+      this.laserBeam1.activate(this.user.ship.x - 8, this.user.ship.y - 33);
+      this.laserBeam2.activate(this.user.ship.x + 8, this.user.ship.y - 33);
     } else if (this.laserBeam1 != null && this.laserBeam2 != null) {
-      this.laserBeam1.disableBody(true, true);
-      this.laserBeam2.disableBody(true, true);
+      this.laserBeam1.deactivate();
+      this.laserBeam2.deactivate();
     }
   }
 }
