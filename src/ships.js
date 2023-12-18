@@ -8,7 +8,7 @@ const ships = [
     name: "Player",
     health: 100,
     speed: 100,
-    weapon: "Auto Cannon",
+    weapon: "Zapper",
     spriteSheet: "player-ship",
     sprite: "Main Ship - Base - Full health.png",
     spawn(scene, x, y) {
@@ -20,7 +20,7 @@ const ships = [
     name: "Vaxtra Battlecruiser",
     health: 100,
     speed: 100,
-    projectile: "Vaxtra Big Bullet",
+    projectile: "Big Bullet",
     spriteSheet: "Kla'ed",
     sprite: "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
     destructionSprite:
@@ -33,7 +33,7 @@ const ships = [
     name: "Vaxtra Scout",
     health: 100,
     speed: 100,
-    projectile: "Vaxtra Bullet",
+    projectile: "Bullet",
     spriteSheet: "Kla'ed",
     sprite: "Scout/Weapon/Kla'ed - Scout - Weapons-0",
     destructionSprite: "Scout/Destruction/Kla'ed - Scout - Destruction-0",
