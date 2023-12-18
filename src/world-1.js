@@ -1,7 +1,6 @@
 import BackgroundController from "./background-controller";
 import PlayerController from "./player-controller";
-import EnemyGroup from "./ships";
-import { getShip } from "./ships";
+import WaveController from "./wave-controller";
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -44,30 +43,13 @@ export default class World1 extends Phaser.Scene {
       this.scale.height - 32
     );
 
-    this.enemies = new EnemyGroup(this, 10, getShip("Vaxtra Battlecruiser"));
-    this.enemy = this.enemies.spawnShip(this.scale.width * 0.5, 50);
-
-    this.physics.add.overlap(
-      this.enemies,
-      this.playerController.player.weapon.projectileGroup,
-      this.playerController.player.weapon.projectileGroup.dealDamage,
-      null,
-      this
-    );
-
-    this.physics.add.overlap(
-      this.playerController.player.ship,
-      this.enemies.projectileGroup,
-      this.enemies.projectileGroup.dealDamage,
-      null,
-      this
+    this.waveController = new WaveController(
+      this,
+      this.playerController.player
     );
   }
 
   update(time) {
-    if (this.enemy.active) {
-      this.enemies.shoot(this.enemy, time, this.enemy.x, this.enemy.y + 13);
-    }
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);
