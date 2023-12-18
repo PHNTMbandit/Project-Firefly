@@ -1,6 +1,6 @@
 import { getWeapon } from "./weapons";
 import { getProjectile } from "./projectiles";
-import ProjectileGroup from "./projectiles";
+import { getProjectileGroup } from "./projectiles";
 
 const ships = [
   {
@@ -55,7 +55,7 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
     super(scene.physics.world, scene);
 
     const projectile = getProjectile(ship.projectile);
-    this.projectileGroup = new ProjectileGroup(scene, projectile, 50);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 50);
 
     this.createMultiple({
       classType: EnemyShip,
@@ -73,7 +73,7 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
         end: ship.weaponFrames,
         zeroPad: 1,
       }),
-      frameRate: 6000 / projectile.fireRate,
+      frameRate: 6000 / getProjectile(ship.projectile).fireRate,
     });
 
     scene.anims.create({

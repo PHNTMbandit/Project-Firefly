@@ -1,5 +1,5 @@
+import { getProjectileGroup } from "./projectiles";
 import { getProjectile } from "./projectiles";
-import ProjectileGroup from "./projectiles";
 
 export var getWeapon = function (name) {
   const weapons = {
@@ -44,7 +44,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
 
     this.user = user;
     this.fireRate = projectile.fireRate;
-    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
     this.fireElapsedTime = 0;
 
     this.anims.create({
@@ -83,7 +83,6 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     if (keySpace.isDown) {
       if (time > this.fireElapsedTime) {
         this.fireElapsedTime = time + this.fireRate;
-
         this.anims.play("use");
 
         this.projectileGroup
@@ -113,7 +112,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
     this.projectileScaleFactor = this.minProjectScaleFactor;
     this.maxProjectileScaleFactor = 2;
     this.projectileScaleRate = 0.01;
-    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "charging",
@@ -173,7 +172,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
     this.user = user;
     this.fireRate = projectile.fireRate;
     this.fireElapsedTime = 0;
-    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 100);
 
     this.anims.create({
       key: "use",
@@ -263,9 +262,9 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.projectileGroup = new ProjectileGroup(scene, projectile, 100);
-    this.laserBeam1 = this.projectileGroup.getProjectile(1);
-    this.laserBeam2 = this.projectileGroup.getProjectile(2);
+    this.projectileGroup = getProjectileGroup(scene, projectile, 2);
+    this.laserBeam1 = this.projectileGroup.getProjectile(0);
+    this.laserBeam2 = this.projectileGroup.getProjectile(1);
 
     this.anims.create({
       key: "use",
@@ -287,12 +286,12 @@ class Zapper extends Phaser.Physics.Arcade.Sprite {
 
   use(keySpace) {
     if (keySpace.isDown) {
-      this.anims.play("use");
-      this.laserBeam1.shoot(this.user.ship.x - 8, this.user.ship.y - 33);
-      this.laserBeam2.shoot(this.user.ship.x + 8, this.user.ship.y - 33);
+      this.anims.play("use", true);
+      this.laserBeam1.activate(this.user.ship.x - 8, this.user.ship.y - 33);
+      this.laserBeam2.activate(this.user.ship.x + 8, this.user.ship.y - 33);
     } else if (this.laserBeam1 != null && this.laserBeam2 != null) {
-      this.laserBeam1.disableBody(true, true);
-      this.laserBeam2.disableBody(true, true);
+      this.laserBeam1.deactivate();
+      this.laserBeam2.deactivate();
     }
   }
 }
