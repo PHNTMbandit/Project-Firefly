@@ -53,6 +53,7 @@ export default class World1 extends Phaser.Scene {
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);
+    this.waveController.updateEnemies(time);
   }
 
   addInput() {

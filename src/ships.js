@@ -1,6 +1,7 @@
 import { getWeapon } from "./weapons";
 import { getProjectile } from "./projectiles";
 import { getProjectileGroup } from "./projectiles";
+import { removeActiveEnemies } from "./wave-controller";
 
 const ships = [
   {
@@ -9,6 +10,7 @@ const ships = [
     health: 100,
     speed: 200,
     weapon: "Auto Cannon",
+    fireRate: 200,
     spriteSheet: "player-ship",
     sprite: "Main Ship - Base - Full health.png",
     spawn(scene, x, y) {
@@ -21,6 +23,7 @@ const ships = [
     health: 100,
     speed: 100,
     projectile: "Big Bullet",
+    fireRate: 200,
     spriteSheet: "Kla'ed",
     sprite: "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
     destructionSprite:
@@ -32,8 +35,9 @@ const ships = [
     ID: 2,
     name: "Vaxtra Scout",
     health: 25,
-    speed: 100,
-    projectile: "Bullet",
+    speed: 50,
+    projectile: "Big Bullet",
+    fireRate: 1500,
     spriteSheet: "Kla'ed",
     sprite: "Scout/Weapon/Kla'ed - Scout - Weapons-0",
     destructionSprite: "Scout/Destruction/Kla'ed - Scout - Destruction-0",
@@ -90,7 +94,6 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
   spawnShip(x, y) {
     const ship = this.getFirstDead(false);
     ship.enableBody(true, x, y, true, true);
-    ship.body.velocity.y = 50;
 
     return ship;
   }
@@ -115,7 +118,9 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.shipData = getShipBySprite(sprite);
     this.projectile = getProjectile(this.shipData.projectile);
     this.name = this.shipData.name;
+    this.fireRate = this.shipData.fireRate;
     this.health = this.shipData.health;
+    this.speed = this.shipData.speed;
     this.spriteSheet = spriteSheet;
     this.sprite = sprite;
     this.fireElapsedTime = 0;
@@ -129,11 +134,6 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
       },
       this
     );
-  }
-
-  testSwerveAI() {
-    this.body.velocity.y = 70;
-    this.body.velocity.x = -50;
   }
 
   preUpdate(time, delta) {
@@ -157,7 +157,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
   shoot(time, x, y, projectileGroup) {
     if (this.health > 0) {
       if (time > this.fireElapsedTime) {
-        this.fireElapsedTime = time + this.projectile.fireRate;
+        this.fireElapsedTime = time + this.fireRate;
         this.anims.play(`${this.name} shoot`, true);
         projectileGroup.getProjectile().shootProjectile(x, y, "down");
       }
@@ -173,6 +173,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
   }
 
   reset() {
+    removeActiveEnemies(this);
     this.health = this.shipData.health;
     this.disableBody(true, true);
     this.setTexture(this.spriteSheet, this.sprite);

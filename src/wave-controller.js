@@ -1,6 +1,12 @@
 import EnemyGroup from "./ships";
 import { getShip } from "./ships";
 
+export var activeEnemies = [];
+
+export function removeActiveEnemies(enemy) {
+  activeEnemies = activeEnemies.filter((i) => i != enemy);
+}
+
 export default class WaveController {
   constructor(scene, player) {
     this.scene = scene;
@@ -23,10 +29,23 @@ export default class WaveController {
     );
 
     scene.time.addEvent({
-      callback: () => this.spawnTriangle(4),
+      callback: () => this.spawnGrid(4, 1),
       delay: 4000,
       loop: true,
     });
+  }
+
+  updateEnemies(time) {
+    if (activeEnemies.length > 0) {
+      for (let i = 0; i < activeEnemies.length; i++) {
+        this.enemies.shoot(
+          activeEnemies[i],
+          time,
+          activeEnemies[i].x,
+          activeEnemies[i].y
+        );
+      }
+    }
   }
 
   spawnGrid(gridX, gridY) {
@@ -41,7 +60,13 @@ export default class WaveController {
 
     for (let y = 0; y < gridY; y++) {
       for (let x = 0; x < gridX; x++) {
-        this.enemies.spawnShip(offsetX + x * spacingX, offsetY + y * spacingY);
+        const enemy = this.enemies.spawnShip(
+          offsetX + x * spacingX,
+          offsetY + y * spacingY
+        );
+
+        enemy.body.velocity.y = enemy.speed;
+        activeEnemies.push(enemy);
       }
     }
   }
@@ -58,7 +83,13 @@ export default class WaveController {
 
     for (let y = 0; y < gridSize; y++) {
       for (let x = y; x < 2 * gridSize - y - 1; x++) {
-        this.enemies.spawnShip(offsetX + x * spacingX, offsetY + y * spacingY);
+        const enemy = this.enemies.spawnShip(
+          offsetX + x * spacingX,
+          offsetY + y * spacingY
+        );
+
+        enemy.body.velocity.y = enemy.speed;
+        activeEnemies.push(enemy);
       }
     }
   }
