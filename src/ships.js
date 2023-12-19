@@ -7,8 +7,8 @@ const ships = [
     ID: 0,
     name: "Player",
     health: 100,
-    speed: 100,
-    weapon: "Zapper",
+    speed: 200,
+    weapon: "Auto Cannon",
     spriteSheet: "player-ship",
     sprite: "Main Ship - Base - Full health.png",
     spawn(scene, x, y) {
@@ -31,7 +31,7 @@ const ships = [
   {
     ID: 2,
     name: "Vaxtra Scout",
-    health: 100,
+    health: 25,
     speed: 100,
     projectile: "Bullet",
     spriteSheet: "Kla'ed",
@@ -90,6 +90,7 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
   spawnShip(x, y) {
     const ship = this.getFirstDead(false);
     ship.enableBody(true, x, y, true, true);
+    ship.body.velocity.y = 50;
 
     return ship;
   }
@@ -111,22 +112,36 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
     this.setFlipY(true);
 
-    const shipData = getShipBySprite(sprite);
-    this.projectile = getProjectile(shipData.projectile);
-    this.name = shipData.name;
+    this.shipData = getShipBySprite(sprite);
+    this.projectile = getProjectile(this.shipData.projectile);
+    this.name = this.shipData.name;
+    this.health = this.shipData.health;
+    this.spriteSheet = spriteSheet;
     this.sprite = sprite;
-    this.health = shipData.health;
     this.fireElapsedTime = 0;
 
     this.on(
       "animationcomplete",
       (e) => {
         if (e.key == `${this.name} destruction`) {
-          this.disableBody(true, true);
+          this.reset();
         }
       },
       this
     );
+  }
+
+  testSwerveAI() {
+    this.body.velocity.y = 70;
+    this.body.velocity.x = -50;
+  }
+
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
+
+    if (this.y >= this.scene.scale.height + 50) {
+      this.reset();
+    }
   }
 
   takeDamage(amount) {
@@ -155,6 +170,13 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.scene.time.delayedCall(delay, () => {
       this.clearTint();
     });
+  }
+
+  reset() {
+    this.health = this.shipData.health;
+    this.disableBody(true, true);
+    this.setTexture(this.spriteSheet, this.sprite);
+    this.body.checkCollision.none = false;
   }
 }
 
