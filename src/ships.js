@@ -90,7 +90,7 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
   spawnShip(x, y) {
     const ship = this.getFirstDead(false);
     ship.enableBody(true, x, y, true, true);
-    ship.testSwerveAI();
+    ship.body.velocity.y = 50;
 
     return ship;
   }
@@ -112,12 +112,12 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
     this.setFlipY(true);
 
-    const shipData = getShipBySprite(sprite);
-    this.projectile = getProjectile(shipData.projectile);
-    this.name = shipData.name;
+    this.shipData = getShipBySprite(sprite);
+    this.projectile = getProjectile(this.shipData.projectile);
+    this.name = this.shipData.name;
+    this.health = this.shipData.health;
     this.spriteSheet = spriteSheet;
     this.sprite = sprite;
-    this.health = shipData.health;
     this.fireElapsedTime = 0;
 
     this.on(
@@ -129,29 +129,18 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
       },
       this
     );
-
-    this.tween = scene.tweens.add({
-      targets: this.body.velocity,
-      x: 50,
-      duration: 2000,
-      ease: "Cubic.easeInOut",
-      repeat: -1,
-      yoyo: true,
-      loop: true,
-    });
   }
 
   testSwerveAI() {
     this.body.velocity.y = 70;
     this.body.velocity.x = -50;
-    this.tween.play();
   }
 
   preUpdate(time, delta) {
     super.preUpdate(time, delta);
 
     if (this.y >= this.scene.scale.height + 50) {
-      this.disableBody(true, true);
+      this.reset();
     }
   }
 
@@ -184,8 +173,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
   }
 
   reset() {
-    this.tween.stop();
-    this.health = getShipBySprite(this.sprite).health;
+    this.health = this.shipData.health;
     this.disableBody(true, true);
     this.setTexture(this.spriteSheet, this.sprite);
     this.body.checkCollision.none = false;
