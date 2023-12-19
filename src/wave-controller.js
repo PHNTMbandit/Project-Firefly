@@ -29,7 +29,7 @@ export default class WaveController {
     );
 
     scene.time.addEvent({
-      callback: () => this.spawnGrid(4, 1),
+      callback: () => this.spawnGrid(3, 1),
       delay: 4000,
       loop: true,
     });

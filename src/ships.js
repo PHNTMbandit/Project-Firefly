@@ -10,7 +10,6 @@ const ships = [
     health: 100,
     speed: 200,
     weapon: "Auto Cannon",
-    fireRate: 200,
     spriteSheet: "player-ship",
     sprite: "Main Ship - Base - Full health.png",
     spawn(scene, x, y) {
