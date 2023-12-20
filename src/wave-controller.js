@@ -38,11 +38,11 @@ export default class WaveController {
       this
     );
 
-    scene.time.addEvent({
-      callback: () => this.spawnGrid(1, 4, this.enemies, "Fly Straight"),
-      delay: 6000,
-      loop: true,
-    });
+    // scene.time.addEvent({
+    //   callback: () => this.spawnGrid(1, 4, this.enemies, "Fly Straight"),
+    //   delay: 6000,
+    //   loop: true,
+    // });
 
     scene.time.addEvent({
       callback: () => this.spawnGrid(3, 1, this.enemies, "Fly Diagonal"),
@@ -58,16 +58,16 @@ export default class WaveController {
   }
 
   updateEnemies(time) {
-    // if (activeEnemies.length > 0) {
-    //   for (let i = 0; i < activeEnemies.length; i++) {
-    //     this.enemies.shoot(
-    //       activeEnemies[i],
-    //       time,
-    //       activeEnemies[i].x,
-    //       activeEnemies[i].y
-    //     );
-    //   }
-    // }
+    if (activeEnemies.length > 0) {
+      for (let i = 0; i < activeEnemies.length; i++) {
+        this.enemies.shoot(
+          activeEnemies[i],
+          time,
+          activeEnemies[i].x,
+          activeEnemies[i].y
+        );
+      }
+    }
   }
 
   spawnGrid(gridX, gridY, objectPool, AIStrategy) {
