@@ -2,6 +2,8 @@ import { getWeapon } from "./weapons";
 import { getProjectile } from "./projectiles";
 import { getProjectileGroup } from "./projectiles";
 import { removeActiveEnemies } from "./wave-controller";
+import { getAIStrategy } from "./AI-strategies";
+import { activeEnemies } from "./wave-controller";
 
 const ships = [
   {
@@ -33,8 +35,8 @@ const ships = [
   {
     ID: 2,
     name: "Vaxtra Scout",
-    health: 25,
-    speed: 50,
+    health: 50,
+    speed: 60,
     projectile: "Big Bullet",
     fireRate: 1500,
     spriteSheet: "Kla'ed",
@@ -90,9 +92,12 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  spawnShip(x, y) {
+  spawn(x, y, AIStrategy) {
     const ship = this.getFirstDead(false);
     ship.enableBody(true, x, y, true, true);
+    activeEnemies.push(ship);
+    ship.setAIStrategy(AIStrategy);
+    ship.useAIStrategy();
 
     return ship;
   }
@@ -114,6 +119,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
     this.setFlipY(true);
 
+    this.AIStrategy = "";
     this.shipData = getShipBySprite(sprite);
     this.projectile = getProjectile(this.shipData.projectile);
     this.name = this.shipData.name;
@@ -141,6 +147,14 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     if (this.y >= this.scene.scale.height + 50) {
       this.reset();
     }
+  }
+
+  setAIStrategy(AIStrategy) {
+    this.AIStrategy = AIStrategy;
+  }
+
+  useAIStrategy() {
+    getAIStrategy(this.AIStrategy).use(this);
   }
 
   takeDamage(amount) {

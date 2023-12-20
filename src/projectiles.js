@@ -43,7 +43,7 @@ const projectiles = [
     ID: 4,
     name: "Laser Beam",
     projectileType: "Beam",
-    damage: 0.1,
+    damage: 0.5,
     spriteSheet: "projectiles",
     sprite: "Laser Beam/Main ship weapon - Projectile - Zapper-0",
     frames: 7,

@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "asteroids.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 124,
+				"h": 329
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Asteroid 01 - Explode-6",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 2,
+						"w": 94,
+						"h": 94
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 94,
+						"h": 94
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-5",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 7,
+						"w": 91,
+						"h": 88
+					},
+					"frame": {
+						"x": 1,
+						"y": 97,
+						"w": 91,
+						"h": 88
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-4",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 12,
+						"w": 80,
+						"h": 77
+					},
+					"frame": {
+						"x": 1,
+						"y": 187,
+						"w": 80,
+						"h": 77
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Base",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 31,
+						"w": 40,
+						"h": 35
+					},
+					"frame": {
+						"x": 83,
+						"y": 187,
+						"w": 40,
+						"h": 35
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-0",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 31,
+						"w": 40,
+						"h": 35
+					},
+					"frame": {
+						"x": 83,
+						"y": 187,
+						"w": 40,
+						"h": 35
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 31,
+						"w": 40,
+						"h": 35
+					},
+					"frame": {
+						"x": 83,
+						"y": 224,
+						"w": 40,
+						"h": 35
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-3",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 14,
+						"y": 22,
+						"w": 67,
+						"h": 62
+					},
+					"frame": {
+						"x": 1,
+						"y": 266,
+						"w": 67,
+						"h": 62
+					}
+				},
+				{
+					"filename": "Asteroid 01 - Explode-2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 96,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 25,
+						"y": 29,
+						"w": 48,
+						"h": 41
+					},
+					"frame": {
+						"x": 70,
+						"y": 266,
+						"w": 48,
+						"h": 41
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:03a8938f590e62d19347b1e4e871ec4f:71159c7f424c1d578e298d606d96ec11:3cb2167982f406a3d6627570b02f9be7$"
+	}
+}
