@@ -1,9 +1,12 @@
+import { updateScoreText } from "./game-UI";
+
 let score = 0;
 export function addScore(amount) {
   score += amount;
-  console.log(score);
+  updateScoreText(score);
 }
 
 export function removeScore(amount) {
   score -= amount;
+  updateScoreText(score);
 }
