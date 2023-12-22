@@ -4,6 +4,7 @@ import { getProjectileGroup } from "./projectiles";
 import { removeActiveEnemies } from "./wave-controller";
 import { getAIStrategy } from "./AI-strategies";
 import { activeEnemies } from "./wave-controller";
+import { addScore } from "./score";
 
 const ships = [
   {
@@ -21,6 +22,7 @@ const ships = [
   {
     ID: 1,
     name: "Vaxtra Battlecruiser",
+    score: 10,
     health: 100,
     speed: 100,
     projectile: "Big Bullet",
@@ -35,6 +37,7 @@ const ships = [
   {
     ID: 2,
     name: "Vaxtra Scout",
+    score: 5,
     health: 50,
     speed: 60,
     projectile: "Big Bullet",
@@ -122,6 +125,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.AIStrategy = "";
     this.shipData = getShipBySprite(sprite);
     this.projectile = getProjectile(this.shipData.projectile);
+    this.score = this.shipData.score;
     this.name = this.shipData.name;
     this.fireRate = this.shipData.fireRate;
     this.health = this.shipData.health;
@@ -161,6 +165,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.health -= amount;
 
     if (this.health <= 0) {
+      addScore(this.score);
       this.anims.remove(`${this.name} shoot`);
       this.anims.play(`${this.name} destruction`);
       this.body.checkCollision.none = true;

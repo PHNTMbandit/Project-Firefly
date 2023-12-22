@@ -1,4 +1,5 @@
 import { getAIStrategy } from "./AI-strategies";
+import { addScore } from "./score";
 
 export default class AsteroidGroup extends Phaser.Physics.Arcade.Group {
   constructor(scene, amount) {
@@ -39,6 +40,7 @@ class Asteroid extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "Asteroids", "Asteroid 01 - Base");
 
+    this.score = 2;
     this.health = 50;
     this.speed = 45;
 
@@ -68,6 +70,7 @@ class Asteroid extends Phaser.Physics.Arcade.Sprite {
     this.health -= amount;
 
     if (this.health <= 0) {
+      addScore(this.score);
       this.anims.play("destruction");
       this.body.checkCollision.none = true;
     }
