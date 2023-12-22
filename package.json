@@ -13,6 +13,8 @@
 		"vite": "^3.2.7"
 	},
 	"dependencies": {
-		"phaser": "^3.55.2"
+		"phaser": "^3.55.2",
+		"webfontloader": "^1.6.28",
+		"webfonts-loader": "^8.0.1"
 	}
 }

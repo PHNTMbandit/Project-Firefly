@@ -1,6 +1,7 @@
 import BackgroundController from "./background-controller";
 import PlayerController from "./player-controller";
 import WaveController from "./wave-controller";
+import { initialiseUI } from "./game-UI";
 
 export default class World1 extends Phaser.Scene {
   constructor() {
@@ -27,6 +28,11 @@ export default class World1 extends Phaser.Scene {
       "/sprites"
     );
     this.load.multiatlas("weapons", "/sprites/weapons.json", "/sprites");
+    this.load.bitmapFont(
+      "pressStart2P",
+      "/fonts/PressStart2P.png",
+      "/fonts/PressStart2P.xml"
+    );
   }
 
   create() {
@@ -43,6 +49,8 @@ export default class World1 extends Phaser.Scene {
       this,
       this.playerController.player
     );
+
+    initialiseUI(this, this.playerController.player);
   }
 
   update(time) {

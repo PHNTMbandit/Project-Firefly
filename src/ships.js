@@ -5,6 +5,7 @@ import { removeActiveEnemies } from "./wave-controller";
 import { getAIStrategy } from "./AI-strategies";
 import { activeEnemies } from "./wave-controller";
 import { addScore } from "./score";
+import { updateHealthText } from "./game-UI";
 
 const ships = [
   {
@@ -231,10 +232,12 @@ class PlayerShip extends Phaser.Physics.Arcade.Sprite {
 
   takeDamage(amount) {
     this.health -= amount;
+    updateHealthText(this.health);
 
     if (this.health <= 0) {
       this.anims.play(`${this.sprite} destruction`);
       this.ship.body.checkCollision.none = true;
+      this.scene.physics.pause();
     }
   }
 
