@@ -5,8 +5,14 @@ export var getWeapon = function (name) {
   const weapons = {
     "Auto Cannon": {
       projectile: "Auto Cannon Bullet",
+      fireRate: 200,
       spawnWeapon(scene, ship) {
-        return new AutoCannon(scene, ship, getProjectile(this.projectile));
+        return new AutoCannon(
+          scene,
+          ship,
+          getProjectile(this.projectile),
+          this.fireRate
+        );
       },
     },
     "Big Space Gun": {
@@ -17,8 +23,14 @@ export var getWeapon = function (name) {
     },
     Rockets: {
       projectile: "Rocket",
+      fireRate: 200,
       spawnWeapon(scene, ship) {
-        return new Rockets(scene, ship, getProjectile(this.projectile));
+        return new Rockets(
+          scene,
+          ship,
+          getProjectile(this.projectile),
+          this.fireRate
+        );
       },
     },
     Zapper: {
@@ -33,7 +45,7 @@ export var getWeapon = function (name) {
 };
 
 class AutoCannon extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user, projectile) {
+  constructor(scene, user, projectile, fireRate) {
     super(
       scene,
       user.x,
@@ -43,7 +55,7 @@ class AutoCannon extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.fireRate = projectile.fireRate;
+    this.fireRate = fireRate;
     this.projectileGroup = getProjectileGroup(scene, projectile, 100);
     this.fireElapsedTime = 0;
 
@@ -160,7 +172,7 @@ class BigSpaceGun extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Rockets extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, user, projectile) {
+  constructor(scene, user, projectile, fireRate) {
     super(
       scene,
       user.x,
@@ -170,7 +182,7 @@ class Rockets extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.user = user;
-    this.fireRate = projectile.fireRate;
+    this.fireRate = fireRate;
     this.fireElapsedTime = 0;
     this.projectileGroup = getProjectileGroup(scene, projectile, 100);
 

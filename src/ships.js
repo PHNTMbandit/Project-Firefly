@@ -1,6 +1,10 @@
 import { getWeapon } from "./weapons";
 import { getProjectile } from "./projectiles";
 import { getProjectileGroup } from "./projectiles";
+import { removeActiveEnemies } from "./wave-controller";
+import { getAIStrategy } from "./AI-strategies";
+import { activeEnemies } from "./wave-controller";
+import { addScore } from "./score";
 
 const ships = [
   {
@@ -18,9 +22,11 @@ const ships = [
   {
     ID: 1,
     name: "Vaxtra Battlecruiser",
+    score: 10,
     health: 100,
     speed: 100,
     projectile: "Big Bullet",
+    fireRate: 200,
     spriteSheet: "Kla'ed",
     sprite: "Battlecruiser/Weapon/Kla'ed - Battlecruiser - Weapons-0",
     destructionSprite:
@@ -31,9 +37,11 @@ const ships = [
   {
     ID: 2,
     name: "Vaxtra Scout",
-    health: 25,
-    speed: 100,
-    projectile: "Bullet",
+    score: 5,
+    health: 50,
+    speed: 60,
+    projectile: "Big Bullet",
+    fireRate: 1500,
     spriteSheet: "Kla'ed",
     sprite: "Scout/Weapon/Kla'ed - Scout - Weapons-0",
     destructionSprite: "Scout/Destruction/Kla'ed - Scout - Destruction-0",
@@ -87,10 +95,12 @@ export default class EnemyGroup extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  spawnShip(x, y) {
+  spawn(x, y, AIStrategy) {
     const ship = this.getFirstDead(false);
     ship.enableBody(true, x, y, true, true);
-    ship.body.velocity.y = 50;
+    activeEnemies.push(ship);
+    ship.setAIStrategy(AIStrategy);
+    ship.useAIStrategy();
 
     return ship;
   }
@@ -112,10 +122,14 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     this.body.setSize(this.frame.cutWidth, this.frame.cutHeight);
     this.setFlipY(true);
 
+    this.AIStrategy = "";
     this.shipData = getShipBySprite(sprite);
     this.projectile = getProjectile(this.shipData.projectile);
+    this.score = this.shipData.score;
     this.name = this.shipData.name;
+    this.fireRate = this.shipData.fireRate;
     this.health = this.shipData.health;
+    this.speed = this.shipData.speed;
     this.spriteSheet = spriteSheet;
     this.sprite = sprite;
     this.fireElapsedTime = 0;
@@ -131,11 +145,6 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     );
   }
 
-  testSwerveAI() {
-    this.body.velocity.y = 70;
-    this.body.velocity.x = -50;
-  }
-
   preUpdate(time, delta) {
     super.preUpdate(time, delta);
 
@@ -144,10 +153,19 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  setAIStrategy(AIStrategy) {
+    this.AIStrategy = AIStrategy;
+  }
+
+  useAIStrategy() {
+    getAIStrategy(this.AIStrategy).use(this);
+  }
+
   takeDamage(amount) {
     this.health -= amount;
 
     if (this.health <= 0) {
+      addScore(this.score);
       this.anims.remove(`${this.name} shoot`);
       this.anims.play(`${this.name} destruction`);
       this.body.checkCollision.none = true;
@@ -157,7 +175,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
   shoot(time, x, y, projectileGroup) {
     if (this.health > 0) {
       if (time > this.fireElapsedTime) {
-        this.fireElapsedTime = time + this.projectile.fireRate;
+        this.fireElapsedTime = time + this.fireRate;
         this.anims.play(`${this.name} shoot`, true);
         projectileGroup.getProjectile().shootProjectile(x, y, "down");
       }
@@ -173,6 +191,7 @@ class EnemyShip extends Phaser.Physics.Arcade.Sprite {
   }
 
   reset() {
+    removeActiveEnemies(this);
     this.health = this.shipData.health;
     this.disableBody(true, true);
     this.setTexture(this.spriteSheet, this.sprite);

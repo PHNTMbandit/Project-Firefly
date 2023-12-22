@@ -6,7 +6,7 @@ export default class PlayerController {
   }
 
   moveShip(cursors) {
-    this.player.ship.body.velocity.scale(0.95);
+    this.player.ship.body.velocity.scale(0.5);
 
     if (cursors.left.isDown) {
       this.player.moveX(-this.player.speed);

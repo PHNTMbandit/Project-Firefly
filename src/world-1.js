@@ -8,28 +8,24 @@ export default class World1 extends Phaser.Scene {
   }
 
   preload() {
+    this.load.multiatlas("Asteroids", "/sprites/asteroids.json", "/sprites");
     this.load.multiatlas(
       "Backgrounds",
       "/sprites/backgrounds.json",
       "/sprites"
     );
-
     this.load.multiatlas("Kla'ed", "/sprites/kla'ed.json", "/sprites");
-
     this.load.multiatlas("Planet", "/sprites/planet.json", "/sprites");
-
     this.load.multiatlas(
       "player-ship",
       "/sprites/player-ship.json",
       "/sprites"
     );
-
     this.load.multiatlas(
       "projectiles",
       "/sprites/projectiles.json",
       "/sprites"
     );
-
     this.load.multiatlas("weapons", "/sprites/weapons.json", "/sprites");
   }
 
@@ -53,6 +49,7 @@ export default class World1 extends Phaser.Scene {
     this.backgroundController.updateBackgrounds();
     this.playerController.moveShip(this.cursors);
     this.playerController.shoot(this.keySpace, time);
+    this.waveController.updateEnemies(time);
   }
 
   addInput() {
